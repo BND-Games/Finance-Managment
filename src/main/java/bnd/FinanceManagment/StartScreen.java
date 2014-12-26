@@ -15,7 +15,8 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-import classes.FileCreater;;
+import classes.FileCreater;
+import classes.Props;
 
 public class StartScreen extends JFrame {
 
@@ -32,11 +33,12 @@ public class StartScreen extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					
 					StartScreen frame = new StartScreen();
 					frame.setVisible(true);
 					if (properties_check() == true)
 					{
-					    System.out.println("[Konsole] Erst Konfiguration wird gestartet.");
+						System.out.println("[Konsole] Erst Konfiguration wird gestartet.");
 						StartConfig start_conf = new StartConfig();
 						start_conf.main(null);
 						frame.setVisible(false);
@@ -98,7 +100,14 @@ public class StartScreen extends JFrame {
 		}
 		else
 		{
-			return false;
+			if (Props.auslesen_properties("erst_konfiguration").equals("abgeschlossen"))
+			{
+				return false;
+			}
+			else
+			{
+				return true;				
+			}
 		}
 	}
 }

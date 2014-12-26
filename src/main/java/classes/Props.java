@@ -26,7 +26,9 @@ public class Props {
 			prop.setProperty("erst_konfiguration", "ausstehend");
 			prop.setProperty("daten_speicherpfad", System.getenv("APPDATA") + "\\Finanzverwaltung\\Data");
 			prop.setProperty("benutzer_speicherpfad", System.getenv("APPDATA") +"\\Finanzverwaltung\\Users");
+			prop.setProperty("user_list", System.getenv("APPDATA") +"\\Finanzverwaltung\\Users\\user_list.xml");
 			prop.setProperty("log_speicherpfad", System.getenv("APPDATA") +"\\Finanzverwaltung\\Logs");
+
 			prop.store(output, null);
 	 
 		} catch (IOException io) {

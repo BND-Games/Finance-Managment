@@ -1,5 +1,6 @@
 package bnd.FinanceManagment;
 import java.awt.EventQueue;
+import java.awt.Frame;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -30,6 +31,7 @@ import javax.swing.JPasswordField;
 
 import classes.FileCreater;
 import classes.MD5Generator;
+import classes.Props;
 import classes.XMLCreater;
 
 @SuppressWarnings("serial")
@@ -91,6 +93,9 @@ public class StartConfig extends JFrame {
 		JButton button_10 = new JButton("Weiter");
 		button_10.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				tabbedPane.setEnabledAt(0, false);
+				tabbedPane.setEnabledAt(1, true);
+				tabbedPane.setSelectedIndex(1);
 			}
 		});
 		button_10.setBounds(276, 312, 104, 23);
@@ -99,6 +104,7 @@ public class StartConfig extends JFrame {
 		JButton button_11 = new JButton("Abbrechen");
 		button_11.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				System.exit(0);
 			}
 		});
 		button_11.setBounds(162, 312, 104, 23);
@@ -153,12 +159,12 @@ public class StartConfig extends JFrame {
 		JButton btnWeiter = new JButton("Weiter");
 		btnWeiter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				tabbedPane.setEnabledAt(0, false);
-				tabbedPane.setEnabledAt(1, true);
-				tabbedPane.setSelectedIndex(1);
+				tabbedPane.setEnabledAt(1, false);
+				tabbedPane.setEnabledAt(2, true);
+				tabbedPane.setSelectedIndex(2);
 			}
 		});
-		btnWeiter.setBounds(276, 312, 104, 23);
+		btnWeiter.setBounds(329, 312, 104, 23);
 		panel.add(btnWeiter);
 		
 		JButton btnAbbrechen = new JButton("Abbrechen");
@@ -167,7 +173,7 @@ public class StartConfig extends JFrame {
 				System.exit(0);
 			}
 		});
-		btnAbbrechen.setBounds(162, 312, 104, 23);
+		btnAbbrechen.setBounds(101, 312, 104, 23);
 		panel.add(btnAbbrechen);
 		
 		textField_lp = new JTextField();
@@ -217,6 +223,17 @@ public class StartConfig extends JFrame {
 		txtpnBitteSeienSie.setText("Bitte seien Sie sich dar\u00FCber im klaren das es bei einer \u00C4nderung der Standardpfade zu Problemen kommen kann welche die Stabilit\u00E4t der Software stark beeinflussen k\u00F6nnen. Es wird deshalb empfohlen die Standardpfade beizubehalten. Falls diese nicht gew\u00FCnscht sind sollte das Programm per rechts Klick als Administrator ausgef\u00FChrt werden.");
 		txtpnBitteSeienSie.setBounds(10, 184, 504, 70);
 		panel.add(txtpnBitteSeienSie);
+		
+		JButton button_12 = new JButton("Zurück");
+		button_12.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				tabbedPane.setEnabledAt(0, true);
+				tabbedPane.setEnabledAt(1, false);
+				tabbedPane.setSelectedIndex(0);
+			}
+		});
+		button_12.setBounds(215, 312, 104, 23);
+		panel.add(button_12);
 		
 		JPanel panel_1 = new JPanel();
 		tabbedPane.addTab("User", null, panel_1, null);
@@ -281,9 +298,9 @@ public class StartConfig extends JFrame {
 					}
 					else
 					{
-						tabbedPane.setEnabledAt(1, false);
-						tabbedPane.setEnabledAt(2, true);
-						tabbedPane.setSelectedIndex(2);
+						tabbedPane.setEnabledAt(2, false);
+						tabbedPane.setEnabledAt(3, true);
+						tabbedPane.setSelectedIndex(3);
 					}
 				}
 				else
@@ -295,9 +312,9 @@ public class StartConfig extends JFrame {
 					else
 					{
 						zf_erstellen();
-						tabbedPane.setEnabledAt(1, false);
-						tabbedPane.setEnabledAt(3, true);
-						tabbedPane.setSelectedIndex(3);
+						tabbedPane.setEnabledAt(2, false);
+						tabbedPane.setEnabledAt(4, true);
+						tabbedPane.setSelectedIndex(4);
 					}
 				}
 			}
@@ -318,9 +335,9 @@ public class StartConfig extends JFrame {
 		JButton btnZurck = new JButton("Zur\u00FCck");
 		btnZurck.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				tabbedPane.setEnabledAt(0, true);
-				tabbedPane.setEnabledAt(1, false);
-				tabbedPane.setSelectedIndex(0);
+				tabbedPane.setEnabledAt(1, true);
+				tabbedPane.setEnabledAt(2, false);
+				tabbedPane.setSelectedIndex(1);
 			}
 		});
 		btnZurck.setBounds(215, 312, 104, 23);
@@ -403,9 +420,9 @@ public class StartConfig extends JFrame {
 					if(pw_s.equals(pw_wdh_s))
 					{
 						zf_erstellen();
-						tabbedPane.setEnabledAt(3, true);
-						tabbedPane.setEnabledAt(2, false);
-						tabbedPane.setSelectedIndex(3);
+						tabbedPane.setEnabledAt(4, true);
+						tabbedPane.setEnabledAt(3, false);
+						tabbedPane.setSelectedIndex(4);
 					}
 					else
 					{
@@ -420,9 +437,9 @@ public class StartConfig extends JFrame {
 		JButton button_6 = new JButton("Zur\u00FCck");
 		button_6.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				tabbedPane.setEnabledAt(1, true);
-				tabbedPane.setEnabledAt(2, false);
-				tabbedPane.setSelectedIndex(1);
+				tabbedPane.setEnabledAt(2, true);
+				tabbedPane.setEnabledAt(3, false);
+				tabbedPane.setSelectedIndex(2);
 			}
 		});
 		button_6.setBounds(215, 312, 104, 23);
@@ -455,15 +472,15 @@ public class StartConfig extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				if(checkbox_sicher.isSelected())
 				{
-					tabbedPane.setEnabledAt(2, true);
-					tabbedPane.setEnabledAt(3, false);
-					tabbedPane.setSelectedIndex(2);
+					tabbedPane.setEnabledAt(3, true);
+					tabbedPane.setEnabledAt(4, false);
+					tabbedPane.setSelectedIndex(3);
 				}
 				else
 				{
-					tabbedPane.setEnabledAt(1, true);
-					tabbedPane.setEnabledAt(2, false);
-					tabbedPane.setSelectedIndex(1);					
+					tabbedPane.setEnabledAt(2, true);
+					tabbedPane.setEnabledAt(3, false);
+					tabbedPane.setSelectedIndex(2);					
 				};
 			}
 		});
@@ -476,6 +493,7 @@ public class StartConfig extends JFrame {
 				
 				String sec_settings;
 				String acc_dir_path = System.getenv("APPDATA") + "\\Finanzverwaltung\\Users\\" + textField_nachname.getText() + "." + textField_vorname.getText();
+				String acc_list_path = System.getenv("APPDATA") + "\\Finanzverwaltung\\Users\\user_list.xml";
 				String acc_dir_sec_path = acc_dir_path + "\\account";
 				String acc_data_dir_path = System.getenv("APPDATA") + "\\Finanzverwaltung\\Data\\" + textField_nachname.getText() + "." + textField_vorname.getText();
 				String acc_dir_file = acc_dir_path + "\\"+ textField_nachname.getText() + "." + textField_vorname.getText() +".xml";
@@ -491,6 +509,7 @@ public class StartConfig extends JFrame {
 				
 				
 				FileCreater fc = new FileCreater();
+		        XMLCreater xml_create = new XMLCreater();
 				fc.verzeichniss_prüfung(textField_dp.getText());
 				fc.verzeichniss_prüfung(textField_up.getText());
 				fc.verzeichniss_prüfung(textField_lp.getText());
@@ -507,7 +526,6 @@ public class StartConfig extends JFrame {
 				
 				if(fc.dir_check(acc_dir_file) == false)
 				{
-					XMLCreater xml_create = new XMLCreater();
 					xml_create.xml_user_file_create(acc_dir_file, textField_vorname.getText(), textField_nachname.getText(), textField_kürzel.getText(), textField_orga.getText(), sec_settings, acc_data_dir_path);
 				}
 
@@ -519,21 +537,25 @@ public class StartConfig extends JFrame {
 						String password_md5 = String.valueOf(passwordField.getPassword());
 						MD5Generator md5g = new MD5Generator();
 						password_md5 = md5g.main(password_md5);
-						
-				        try { 
-				            Thread.sleep(1000); 
-				        } catch (InterruptedException e) { 
-				            e.printStackTrace(); 
-				        }  
-				        XMLCreater xml_create = new XMLCreater();
 						xml_create.xml_user_security_file_create(acc_dir_sec_path, textField_nick.getText(), password_md5, textField_email.getText());
+						
 					}
 					else
 					{
 						JOptionPane.showMessageDialog(null, "Ihre Sicherheitseinstellungen konnten nicht übernommen werden!");
 					    System.err.println("[Fehler] Sicherheitseinstellungen konnten nicht übernommen werden.");
 					}
+					xml_create.xml_user_list_create(acc_list_path, textField_vorname.getText(), textField_nachname.getText(), "true");
 				}
+				else
+				{
+					xml_create.xml_user_list_create(acc_list_path, textField_vorname.getText(), textField_nachname.getText(), "false");					
+				}
+				
+				Props properties = new Props();
+				properties.ändere_properties("erst_konfiguration", "abgeschlossen");				
+				StartScreen startscreen = new StartScreen();
+				startscreen.main(null);
 			}
 		});
 		btnAbschlieen.setBounds(319, 312, 104, 23);

@@ -1,6 +1,7 @@
 package classes;
 
 import java.io.File;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.Transformer;
@@ -8,6 +9,7 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
  
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -109,6 +111,53 @@ public class XMLCreater {
 			mail.appendChild(doc.createTextNode(email));
 			acc_infos.appendChild(mail);
 	
+			// write the content into xml file
+			TransformerFactory transformerFactory = TransformerFactory.newInstance();
+			Transformer transformer = transformerFactory.newTransformer();
+			DOMSource source = new DOMSource(doc);
+			StreamResult result = new StreamResult(new File(file_path));
+	
+			transformer.transform(source, result);
+		} 
+		catch (Exception ex) 
+		{
+			System.err.println("[Fehler] Beim erstellen der Sicherheits relevanten XML " + file_path + " ist ein Fehler aufgetreten!");
+			return;
+		} 	
+		System.out.println("[Konsole] Die Sicherheits relevante XML "+ file_path +" geschrieben!");
+	}
+	
+	public void xml_user_list_create(String file_path, String firstname, String lastname , String security)
+	{	 
+		try 
+		{
+			DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+			DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+	
+			// root elements
+			Document doc = docBuilder.newDocument();
+			Element rootElement = doc.createElement("user_list");
+			doc.appendChild(rootElement);
+	
+			// Account-List elements
+			Element acc_list = doc.createElement(firstname + "." + lastname);
+			rootElement.appendChild(acc_list);
+	
+			// firstname elements
+			Element f_name = doc.createElement("firstname");
+			f_name.appendChild(doc.createTextNode(firstname));
+			acc_list.appendChild(f_name);
+	
+			// lastname elements
+			Element l_name = doc.createElement("lastname");
+			l_name.appendChild(doc.createTextNode(lastname));
+			acc_list.appendChild(l_name);
+	
+			// security elements
+			Element sec = doc.createElement("security");
+			sec.appendChild(doc.createTextNode(security));
+			acc_list.appendChild(sec);
+			
 			// write the content into xml file
 			TransformerFactory transformerFactory = TransformerFactory.newInstance();
 			Transformer transformer = transformerFactory.newTransformer();
