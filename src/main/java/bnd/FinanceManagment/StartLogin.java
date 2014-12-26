@@ -11,7 +11,9 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
+
 import java.awt.Font;
+
 import javax.swing.SwingConstants;
 
 public class StartLogin {
@@ -53,7 +55,7 @@ public class StartLogin {
 		frmFinanzverwaltungLogin.setBounds(100, 100, 450, 300);
 		frmFinanzverwaltungLogin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		JList list = new JList();
+		JList<Object> list = new JList<Object>();
 		
 		textField = new JTextField();
 		textField.setEditable(false);
