@@ -1,7 +1,5 @@
 package bnd.FinanceManagment;
 import java.awt.EventQueue;
-import java.awt.Frame;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -55,7 +53,7 @@ public class StartConfig extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public void main(String[] args) {
+	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -554,8 +552,8 @@ public class StartConfig extends JFrame {
 				
 				Props properties = new Props();
 				properties.ändere_properties("erst_konfiguration", "abgeschlossen");				
-				StartScreen startscreen = new StartScreen();
-				startscreen.main(null);
+				StartScreen.main(null);
+				dispose();
 			}
 		});
 		btnAbschlieen.setBounds(319, 312, 104, 23);

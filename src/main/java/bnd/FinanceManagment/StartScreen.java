@@ -32,20 +32,20 @@ public class StartScreen extends JFrame {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				try {
-					
+				try {					
 					StartScreen frame = new StartScreen();
 					frame.setVisible(true);
 					if (properties_check() == true)
 					{
 						System.out.println("[Konsole] Erst Konfiguration wird gestartet.");
-						StartConfig start_conf = new StartConfig();
-						start_conf.main(null);
-						frame.setVisible(false);
+						StartConfig.main(null);
+						frame.dispose();
 					}
 					else
 					{
-						
+						System.out.println("[Konsole] Starten der Login Maske");
+						StartLogin.main(null);
+						frame.dispose();
 					}
 				} catch (Exception e) {
 					e.printStackTrace();
