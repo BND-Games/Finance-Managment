@@ -1,4 +1,4 @@
-package bnd.FinanceManagment;
+package bnd_games.financemanagment.start;
 
 import java.awt.EventQueue;
 
@@ -43,6 +43,7 @@ public class StartLogin {
 	 */
 	public StartLogin() {
 		initialize();
+		initalize_list();
 	}
 
 	/**
@@ -121,5 +122,10 @@ public class StartLogin {
 					.addContainerGap())
 		);
 		frmFinanzverwaltungLogin.getContentPane().setLayout(groupLayout);
+	}
+	
+	private void initalize_list()
+	{
+		
 	}
 }

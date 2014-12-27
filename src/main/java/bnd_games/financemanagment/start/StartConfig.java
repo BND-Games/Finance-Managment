@@ -1,5 +1,6 @@
-package bnd.FinanceManagment;
+package bnd_games.financemanagment.start;
 import java.awt.EventQueue;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -27,10 +28,10 @@ import java.awt.SystemColor;
 import javax.swing.JCheckBox;
 import javax.swing.JPasswordField;
 
-import classes.FileCreater;
-import classes.MD5Generator;
-import classes.Props;
-import classes.XMLCreater;
+import bnd_games.financemanagment.classes.FileCreater;
+import bnd_games.financemanagment.classes.MD5Generator;
+import bnd_games.financemanagment.classes.Props;
+import bnd_games.financemanagment.classes.XMLCreater;
 
 @SuppressWarnings("serial")
 public class StartConfig extends JFrame {
@@ -129,7 +130,7 @@ public class StartConfig extends JFrame {
 		Button button = new Button("Pfad w\u00E4hlen");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				classes.FileChooser fc = new classes.FileChooser();
+				bnd_games.financemanagment.classes.FileChooser fc = new bnd_games.financemanagment.classes.FileChooser();
 				String ergebnis = fc.datenwahl("Daten Pfad");
 				if (ergebnis != null)
 				{
@@ -143,7 +144,7 @@ public class StartConfig extends JFrame {
 		Button button_1 = new Button("Pfad w\u00E4hlen");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				classes.FileChooser fc = new classes.FileChooser();
+				bnd_games.financemanagment.classes.FileChooser fc = new bnd_games.financemanagment.classes.FileChooser();
 				String ergebnis = fc.datenwahl("User Pfad");
 				if (ergebnis != null)
 				{
@@ -183,7 +184,7 @@ public class StartConfig extends JFrame {
 		Button button_2 = new Button("Pfad w\u00E4hlen");
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				classes.FileChooser fc = new classes.FileChooser();
+				bnd_games.financemanagment.classes.FileChooser fc = new bnd_games.financemanagment.classes.FileChooser();
 				String ergebnis = fc.datenwahl("Log Pfad");
 				if (ergebnis != null)
 				{
@@ -581,9 +582,9 @@ public class StartConfig extends JFrame {
 
 	private static void datenfelder_auslesen()
 	{
-		textField_dp.setText(classes.Props.auslesen_properties("daten_speicherpfad"));
-		textField_up.setText(classes.Props.auslesen_properties("benutzer_speicherpfad"));
-		textField_lp.setText(classes.Props.auslesen_properties("log_speicherpfad"));
+		textField_dp.setText(bnd_games.financemanagment.classes.Props.auslesen_properties("daten_speicherpfad"));
+		textField_up.setText(bnd_games.financemanagment.classes.Props.auslesen_properties("benutzer_speicherpfad"));
+		textField_lp.setText(bnd_games.financemanagment.classes.Props.auslesen_properties("log_speicherpfad"));
 	}
 	
 	private void zf_erstellen()

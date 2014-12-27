@@ -5,4 +5,4 @@
  * @author bjoer_000
  *
  */
-package classes;
+package bnd_games.financemanagment.guis;

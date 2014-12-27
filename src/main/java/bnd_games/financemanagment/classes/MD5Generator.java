@@ -1,4 +1,4 @@
-package classes;
+package bnd_games.financemanagment.classes;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;

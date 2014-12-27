@@ -1,4 +1,4 @@
-package classes;
+package bnd_games.financemanagment.classes;
 import javax.swing.JFileChooser;
 
 public class FileChooser {

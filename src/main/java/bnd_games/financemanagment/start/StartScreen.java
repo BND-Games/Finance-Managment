@@ -1,4 +1,4 @@
-package bnd.FinanceManagment;
+package bnd_games.financemanagment.start;
 
 import java.awt.EventQueue;
 
@@ -12,11 +12,11 @@ import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 
+import bnd_games.financemanagment.classes.FileCreater;
+import bnd_games.financemanagment.classes.Props;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-
-import classes.FileCreater;
-import classes.Props;
 
 public class StartScreen extends JFrame {
 

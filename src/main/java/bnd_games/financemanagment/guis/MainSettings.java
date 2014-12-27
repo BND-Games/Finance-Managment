@@ -1,4 +1,4 @@
-package guis;
+package bnd_games.financemanagment.guis;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -8,13 +8,13 @@ import javax.swing.JTabbedPane;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 
+import bnd_games.financemanagment.classes.FileChooser;
+import bnd_games.financemanagment.classes.Props;
+
 import java.awt.Label;
 import java.awt.Button;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
-import classes.FileChooser;
-import classes.Props;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 

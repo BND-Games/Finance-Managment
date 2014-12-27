@@ -1,4 +1,4 @@
-package guis;
+package bnd_games.financemanagment.guis;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
