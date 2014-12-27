@@ -492,7 +492,6 @@ public class StartConfig extends JFrame {
 				
 				String sec_settings;
 				String acc_dir_path = System.getenv("APPDATA") + "\\Finanzverwaltung\\Users\\" + textField_nachname.getText() + "." + textField_vorname.getText();
-				String acc_list_path = System.getenv("APPDATA") + "\\Finanzverwaltung\\Users\\user_list.xml";
 				String acc_dir_sec_path = acc_dir_path + "\\account";
 				String acc_data_dir_path = System.getenv("APPDATA") + "\\Finanzverwaltung\\Data\\" + textField_nachname.getText() + "." + textField_vorname.getText();
 				String acc_dir_file = acc_dir_path + "\\"+ textField_nachname.getText() + "." + textField_vorname.getText() +".xml";
@@ -544,11 +543,6 @@ public class StartConfig extends JFrame {
 						JOptionPane.showMessageDialog(null, "Ihre Sicherheitseinstellungen konnten nicht übernommen werden!");
 					    System.err.println("[Fehler] Sicherheitseinstellungen konnten nicht übernommen werden.");
 					}
-					xml_create.xml_user_list_create(acc_list_path, textField_vorname.getText(), textField_nachname.getText(), "true");
-				}
-				else
-				{
-					xml_create.xml_user_list_create(acc_list_path, textField_vorname.getText(), textField_nachname.getText(), "false");					
 				}
 				
 				Props properties = new Props();

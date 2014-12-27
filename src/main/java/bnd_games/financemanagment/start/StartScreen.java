@@ -12,6 +12,7 @@ import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 
+import bnd_games.financemanagment.classes.FileChooser;
 import bnd_games.financemanagment.classes.FileCreater;
 import bnd_games.financemanagment.classes.Props;
 
@@ -43,6 +44,8 @@ public class StartScreen extends JFrame {
 					}
 					else
 					{
+						System.out.println("[Konsole] Erstellen der Userliste");
+						FileChooser.readUserData();
 						System.out.println("[Konsole] Starten der Login Maske");
 						StartLogin.main(null);
 						frame.dispose();
