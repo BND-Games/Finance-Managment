@@ -1,7 +1,5 @@
 package bnd_games.financemanagment.classes;
 import java.io.File;
-import java.util.ArrayList;
-
 import javax.swing.JFileChooser;
 
 public class FileChooser {
@@ -24,15 +22,12 @@ public class FileChooser {
 		
 		File f = new File(user_path);
 		File[] fileArray = f.listFiles();
-		
-		ArrayList<String> usernames = new ArrayList<String>();
-		
-		int i = 0;
+				
 		for (File file : fileArray) {
 			String filestr = file.toString();
-			usernames.add(filestr.substring(filestr.lastIndexOf("\\") +1));
-			System.out.println(usernames.get(i)); // Debug Zwecke
-			i++;
+			filestr = filestr.substring(filestr.lastIndexOf("\\") +1);
+			XMLCreater.read_users_xml(file, filestr);
+			System.out.println(filestr); // Debug Zwecke
 		}	
 	}
 }

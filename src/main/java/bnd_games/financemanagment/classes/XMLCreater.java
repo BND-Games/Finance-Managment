@@ -174,7 +174,7 @@ public class XMLCreater {
 		System.out.println("[Konsole] Die Sicherheits relevante XML "+ file_path +" geschrieben!");
 	}
 	
-	public void read_users_xml(File path)
+	public static void read_users_xml(File path, String filename)
 	{
 		
 	}
