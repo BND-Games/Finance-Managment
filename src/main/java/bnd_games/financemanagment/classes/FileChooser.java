@@ -24,10 +24,12 @@ public class FileChooser {
 		File[] fileArray = f.listFiles();
 				
 		for (File file : fileArray) {
-			String filestr = file.toString();
-			filestr = filestr.substring(filestr.lastIndexOf("\\") +1);
-			XMLCreater.read_users_xml(file, filestr);
-			System.out.println(filestr); // Debug Zwecke
+			String filestr = file.toString().substring(file.toString().lastIndexOf("\\") +1);
+			String file_path = file.toString() + "\\" + filestr + ".xml";
+			file = new File (file_path);
+			System.err.println("[Debug] " + file);
+			System.err.println("[Debug] " +filestr);
+			XMLCreater.read_users_xml(file);
 		}	
 	}
 }

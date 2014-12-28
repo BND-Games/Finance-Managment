@@ -10,8 +10,12 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
  
 
+
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 public class XMLCreater {
 	public void xml_user_file_create(String file_path, String vorname, String nachname, String kürzel, String organisation, String sec_settings, String account_data_directory_path)
@@ -174,9 +178,25 @@ public class XMLCreater {
 		System.out.println("[Konsole] Die Sicherheits relevante XML "+ file_path +" geschrieben!");
 	}
 	
-	public static void read_users_xml(File path, String filename)
+	public static void read_users_xml(File path)
 	{
-		
+	    try {	    	 
+	    	DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+	    	DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+	    	Document doc = dBuilder.parse(path);
+	     
+	    	NodeList nList = doc.getElementsByTagName("account_details");	     
+    		Node nNode = nList.item(0);
+   	     
+    		if (nNode.getNodeType() == Node.ELEMENT_NODE) {	     
+    			Element eElement = (Element) nNode;	     
+    			System.err.println("[Debug] " + eElement.getElementsByTagName("firstname").item(0).getTextContent());
+    			System.err.println("[Debug] " + eElement.getElementsByTagName("lastname").item(0).getTextContent());
+    			System.err.println("[Debug] " + eElement.getElementsByTagName("security_settings").item(0).getTextContent());	     
+    		}
+	        } catch (Exception ex) {
+	        	ex.printStackTrace();
+	        }
 	}
 
 }
