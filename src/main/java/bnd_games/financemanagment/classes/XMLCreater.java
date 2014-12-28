@@ -195,7 +195,8 @@ public class XMLCreater {
     			System.err.println("[Debug] " + eElement.getElementsByTagName("security_settings").item(0).getTextContent());	     
     		}
 	        } catch (Exception ex) {
-	        	ex.printStackTrace();
+				System.err.println("[Fehler] Beim auslesen der XML-Datei " + path + " ist ein Fehler aufgetreten!");
+				return;
 	        }
 	}
 

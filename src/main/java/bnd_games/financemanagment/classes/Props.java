@@ -77,7 +77,7 @@ public class Props {
 		}		
 	}
 	
-	@SuppressWarnings("finally")
+
 	public static String auslesen_properties(String einstellung)
 	{
 		String einstellung_prop = null;
@@ -90,9 +90,8 @@ public class Props {
 		}catch(Exception ex){
 			System.err.println("[Fehler] Einlesen der Properties gescheitert.");
 			return "fehlgeschlagen";			
-		}finally{
-			System.out.println("[Konsole] Einlesen der Properties erfolgreich.");
-			return einstellung_prop;
 		}
+		System.out.println("[Konsole] Einlesen der Properties erfolgreich.");
+		return einstellung_prop;
 	}
 }
