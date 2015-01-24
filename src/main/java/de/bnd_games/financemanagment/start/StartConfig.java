@@ -34,6 +34,9 @@ import de.bnd_games.financemanagment.classes.MD5Generator;
 import de.bnd_games.financemanagment.classes.Props;
 import de.bnd_games.financemanagment.classes.XMLCreater;
 
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+
 @SuppressWarnings("serial")
 public class StartConfig extends JFrame {
 
@@ -51,6 +54,8 @@ public class StartConfig extends JFrame {
 	private JPasswordField passwordField_wdh;
 	private JTextPane txtpn_zf;
 	private JCheckBox checkbox_sicher;
+	static final Logger logger = LogManager.getLogger(StartConfig.class
+			.getName());
 
 	/**
 	 * Launch the application.
@@ -516,8 +521,7 @@ public class StartConfig extends JFrame {
 
 				// generating user path
 				if (fc.verzeichniss_prüfung(acc_dir_path) == false) {
-					System.out
-							.println("[Warnung] Konfiguration wurde beendet da die Kombination aus Vor und Nachnamen bereits existiert.");
+					logger.warn("Konfiguration wurde beendet da die Kombination aus Vor und Nachnamen bereits existiert");
 					JOptionPane
 							.showMessageDialog(null,
 									"Die Kombination aus Vor und Nachnamen existiert bereits.");
@@ -550,8 +554,7 @@ public class StartConfig extends JFrame {
 						JOptionPane
 								.showMessageDialog(null,
 										"Ihre Sicherheitseinstellungen konnten nicht übernommen werden!");
-						System.err
-								.println("[Fehler] Sicherheitseinstellungen konnten nicht übernommen werden.");
+						logger.error("Sicherheitseinstellungen konnten nicht übernommen werden.");
 					}
 				}
 

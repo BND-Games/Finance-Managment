@@ -9,12 +9,17 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 public class XMLCreater {
+	static final Logger logger = LogManager.getLogger(XMLCreater.class
+			.getName());
+
 	public void xml_user_file_create(String file_path, String vorname,
 			String nachname, String kürzel, String organisation,
 			String sec_settings, String account_data_directory_path) {
@@ -72,12 +77,11 @@ public class XMLCreater {
 
 			transformer.transform(source, result);
 		} catch (Exception ex) {
-			System.err.println("[Fehler] Beim erstellen der XML " + file_path
+			logger.error("Beim erstellen der XML " + file_path
 					+ " ist ein Fehler aufgetreten!");
 			return;
 		} finally {
-			System.out.println("[Konsole] User XML für " + file_path
-					+ " geschrieben!");
+			logger.info("User XML für " + file_path + " geschrieben!");
 
 		}
 	}
@@ -122,13 +126,12 @@ public class XMLCreater {
 
 			transformer.transform(source, result);
 		} catch (Exception ex) {
-			System.err
-					.println("[Fehler] Beim erstellen der Sicherheits relevanten XML "
-							+ file_path + " ist ein Fehler aufgetreten!");
+			logger.error("Beim erstellen der Sicherheits relevanten XML "
+					+ file_path + " ist ein Fehler aufgetreten!");
 			return;
 		}
-		System.out.println("[Konsole] Die Sicherheits relevante XML "
-				+ file_path + " geschrieben!");
+		logger.info("Die Sicherheits relevante XML " + file_path
+				+ " geschrieben!");
 	}
 
 	public void xml_user_list_create(String file_path, String firstname,
@@ -171,13 +174,12 @@ public class XMLCreater {
 
 			transformer.transform(source, result);
 		} catch (Exception ex) {
-			System.err
-					.println("[Fehler] Beim erstellen der Sicherheits relevanten XML "
-							+ file_path + " ist ein Fehler aufgetreten!");
+			logger.error("Beim erstellen der Sicherheits relevanten XML "
+					+ file_path + " ist ein Fehler aufgetreten!");
 			return;
 		}
-		System.out.println("[Konsole] Die Sicherheits relevante XML "
-				+ file_path + " geschrieben!");
+		logger.info("Die Sicherheits relevante XML " + file_path
+				+ " geschrieben!");
 	}
 
 	public static void read_users_xml(File path) {
@@ -192,18 +194,15 @@ public class XMLCreater {
 
 			if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 				Element eElement = (Element) nNode;
-				System.err.println("[Debug] "
-						+ eElement.getElementsByTagName("firstname").item(0)
-								.getTextContent());
-				System.err.println("[Debug] "
-						+ eElement.getElementsByTagName("lastname").item(0)
-								.getTextContent());
-				System.err.println("[Debug] "
-						+ eElement.getElementsByTagName("security_settings")
-								.item(0).getTextContent());
+				logger.debug(eElement.getElementsByTagName("firstname").item(0)
+						.getTextContent());
+				logger.debug(eElement.getElementsByTagName("lastname").item(0)
+						.getTextContent());
+				logger.debug(eElement.getElementsByTagName("security_settings")
+						.item(0).getTextContent());
 			}
 		} catch (Exception ex) {
-			System.err.println("[Fehler] Beim auslesen der XML-Datei " + path
+			logger.error("Beim auslesen der XML-Datei " + path
 					+ " ist ein Fehler aufgetreten!");
 			return;
 		}

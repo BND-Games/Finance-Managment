@@ -8,7 +8,12 @@ import java.util.Properties;
 
 import javax.swing.JOptionPane;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class Props {
+	static final Logger logger = LogManager.getLogger(Props.class.getName());
+
 	private static String pfad_properties() {
 		String pfad_verzeichniss = System.getenv("APPDATA")
 				+ "\\Finanzverwaltung\\config.properties";
@@ -16,7 +21,7 @@ public class Props {
 	}
 
 	public void erstelle_properties() {
-		System.out.println("[Konsole] Schreibe Properties");
+		logger.info("Schreibe Properties");
 		Properties prop = new Properties();
 		OutputStream output = null;
 
@@ -36,52 +41,46 @@ public class Props {
 			prop.store(output, null);
 
 		} catch (IOException io) {
-			System.err
-					.println("[Fehler] Schreiben der Properties Fehlgeschlagen");
+			logger.error("Schreiben der Properties Fehlgeschlagen");
 			return;
+
 		} finally {
 			if (output != null) {
 				try {
 					output.close();
 				} catch (IOException e) {
-					System.err
-							.println("[Fehler] Schreiben der Properties Fehlgeschlagen");
+					logger.error("Schreiben der Properties Fehlgeschlagen");
 					return;
 				}
 			}
-			System.out
-					.println("[Konsole] Schreiben der Properties erfolgreich.");
+			logger.info("Schreiben der Properties erfolgreich.");
 		}
 	}
 
 	public void ändere_properties(String einstellung, String neuer_wert) {
 		Properties props = new Properties();
 		try {
-			System.out.println("[Konsole] Lese alte Properties ein.");
+			logger.info("Lese alte Properties ein.");
 			FileInputStream in = new FileInputStream(pfad_properties());
 			props.load(in);
 			in.close();
 		} catch (Exception ex) {
-			System.err
-					.println("[Fehler] Einlesen der alten Properties gescheitert.");
+			logger.error("Einlesen der alten Properties gescheitert.");
 			return;
 		} finally {
-			System.out
-					.println("[Konsole] Einlesen der alten Properties erfolgreich.");
+			logger.info("Einlesen der alten Properties erfolgreich.");
 		}
 		try {
-			System.out.println("[Konsole] Schreiben der neuen Properties.");
+			logger.info("Schreiben der neuen Properties.");
 			FileOutputStream out = new FileOutputStream(pfad_properties());
 			props.setProperty(einstellung, neuer_wert);
 			props.store(out, null);
 			out.close();
 		} catch (Exception ex) {
-			System.err
-					.println("[Fehler] Schreiben der alten Properties gescheitert.");
+			logger.error("Schreiben der alten Properties gescheitert.");
 			return;
 		} finally {
-			System.out
-					.println("[Konsole] Schreiben der neuen Properties erolgreich.");
+			logger.info("Schreiben der neuen Properties erolgreich.");
 			JOptionPane.showMessageDialog(null,
 					"Einstellungen erfolgreich gespeichert.");
 		}
@@ -91,15 +90,15 @@ public class Props {
 		String einstellung_prop = null;
 		Properties props = new Properties();
 		try {
-			System.out.println("[Konsole] Lese Properties ein.");
+			logger.info("Lese Properties ein.");
 			FileInputStream in = new FileInputStream(pfad_properties());
 			props.load(in);
 			einstellung_prop = props.getProperty(einstellung);
 		} catch (Exception ex) {
-			System.err.println("[Fehler] Einlesen der Properties gescheitert.");
+			logger.error("Einlesen der Properties gescheitert.");
 			return "fehlgeschlagen";
 		}
-		System.out.println("[Konsole] Einlesen der Properties erfolgreich.");
+		logger.info("Einlesen der Properties erfolgreich.");
 		return einstellung_prop;
 	}
 }

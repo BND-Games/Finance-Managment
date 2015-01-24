@@ -2,23 +2,26 @@ package de.bnd_games.financemanagment.classes;
 
 import java.io.File;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class FileCreater {
+	static final Logger logger = LogManager.getLogger(FileCreater.class
+			.getName());
 
 	// error_message should be given if the directory is important, isn't it it
 	// should be get null.
 
 	public boolean verzeichniss_prüfung(String pfad_verzeichniss) {
-		System.out
-				.println("[Konsole] Prüfung ob Verzeichniss bereits existiert.");
+		logger.info("Prüfung ob Verzeichniss bereits existiert.");
 		File verzeichniss_prüfung = new File(pfad_verzeichniss);
 		if (verzeichniss_prüfung.exists()) {
-			System.out.println("[Konsole] Verzeichniss ist bereits existent.");
-			System.out.println("[Konsole] " + verzeichniss_prüfung);
+			logger.info("Verzeichniss ist bereits existent.");
+			logger.info(verzeichniss_prüfung);
 			return false;
 		} else {
-			System.out
-					.println("[Konsole] Verzeichniss ist noch nicht existent.");
 			verzeichniss_erstellen(verzeichniss_prüfung);
+			logger.info("Verzeichniss ist noch nicht existent.");
 			return true;
 		}
 
@@ -35,15 +38,15 @@ public class FileCreater {
 
 	public void verzeichniss_erstellen(File verzeichniss_prüfung) {
 		try {
-			System.out.println("[Konsole] Schreibe Verzeichniss");
+			logger.info("Schreibe Verzeichnis");
 			verzeichniss_prüfung.mkdir();
 		} catch (Exception ex) {
-			System.err.println("[Fehler] Konnte Verzeichniss nicht erstellen.");
-			System.err.println("[Konsole] " + verzeichniss_prüfung);
+			logger.error("Konnte Verzeichniss nicht erstellen.");
+			logger.error(verzeichniss_prüfung);
 			return;
 		} finally {
-			System.out.println("[Konsole] Verzeichniss erfolgreich erstellt.");
-			System.out.println("[Konsole] " + verzeichniss_prüfung);
+			logger.error("Verzeichniss erfolgreich erstellt.");
+			logger.error(verzeichniss_prüfung);
 		}
 	}
 

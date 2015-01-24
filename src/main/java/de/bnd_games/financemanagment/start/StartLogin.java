@@ -16,11 +16,16 @@ import java.awt.Font;
 
 import javax.swing.SwingConstants;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class StartLogin {
 
 	private JFrame frmFinanzverwaltungLogin;
 	private JTextField textField;
 	private JPasswordField passwordField;
+	static final Logger logger = LogManager.getLogger(StartLogin.class
+			.getName());
 
 	/**
 	 * Launch the application.

@@ -12,6 +12,9 @@ import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import de.bnd_games.financemanagment.classes.FileChooser;
 import de.bnd_games.financemanagment.classes.FileCreater;
 import de.bnd_games.financemanagment.classes.Props;
@@ -19,12 +22,10 @@ import de.bnd_games.financemanagment.classes.Props;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+@SuppressWarnings("serial")
 public class StartScreen extends JFrame {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 8760906563233681727L;
+	static final Logger logger = LogManager.getLogger(StartScreen.class
+			.getName());
 	private JPanel contentPane;
 
 	/**
@@ -37,14 +38,13 @@ public class StartScreen extends JFrame {
 					StartScreen frame = new StartScreen();
 					frame.setVisible(true);
 					if (properties_check() == true) {
-						System.out
-								.println("[Konsole] Erst Konfiguration wird gestartet.");
+						logger.info("Erst Konfiguration wird gestartet.");
 						StartConfig.main(null);
 						frame.dispose();
 					} else {
-						System.out.println("[Konsole] Erstellen der Userliste");
+						logger.info("Erstellen der Userliste");
 						FileChooser.readUserData();
-						System.out.println("[Konsole] Starten der Login Maske");
+						logger.info("Starten der Login Maske");
 						StartLogin.main(null);
 						frame.dispose();
 					}
