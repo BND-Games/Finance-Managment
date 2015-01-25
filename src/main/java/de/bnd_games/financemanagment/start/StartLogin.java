@@ -2,6 +2,7 @@ package de.bnd_games.financemanagment.start;
 
 import java.awt.EventQueue;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -13,11 +14,14 @@ import javax.swing.JPasswordField;
 import javax.swing.JButton;
 
 import java.awt.Font;
+import java.util.ArrayList;
 
 import javax.swing.SwingConstants;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import de.bnd_games.financemanagment.classes.FileChooser;
 
 public class StartLogin {
 
@@ -26,6 +30,11 @@ public class StartLogin {
 	private JPasswordField passwordField;
 	static final Logger logger = LogManager.getLogger(StartLogin.class
 			.getName());
+	
+	//Deklariere ListModel in welches Daten kommen.
+	DefaultListModel<String> dfm = new DefaultListModel<String>();
+	//Jlist -> wird mit ListModel gefüttert
+	JList<String> list = new JList<String>(dfm);
 
 	/**
 	 * Launch the application.
@@ -60,8 +69,6 @@ public class StartLogin {
 		frmFinanzverwaltungLogin.setTitle("Finanzverwaltung Login");
 		frmFinanzverwaltungLogin.setBounds(100, 100, 450, 300);
 		frmFinanzverwaltungLogin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-		JList<Object> list = new JList<Object>();
 
 		textField = new JTextField();
 		textField.setEditable(false);
@@ -216,6 +223,15 @@ public class StartLogin {
 	}
 
 	private void initalize_list() {
+		logger.info("Erstellen der Userliste");
+		ArrayList<String> result = new ArrayList<String>();
+		result.addAll(0, FileChooser.readUserData());
 
+		int i = result.size() - 1;
+		while (i >= 0) {
+			logger.info("Füge Userlist: " + result.get(i) + " hinzu.");
+			dfm.addElement(result.get(i));
+			i--;
+		}
 	}
 }

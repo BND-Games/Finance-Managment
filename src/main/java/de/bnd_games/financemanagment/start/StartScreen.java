@@ -15,7 +15,6 @@ import javax.swing.JButton;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import de.bnd_games.financemanagment.classes.FileChooser;
 import de.bnd_games.financemanagment.classes.FileCreater;
 import de.bnd_games.financemanagment.classes.Props;
 
@@ -42,8 +41,6 @@ public class StartScreen extends JFrame {
 						StartConfig.main(null);
 						frame.dispose();
 					} else {
-						logger.info("Erstellen der Userliste");
-						FileChooser.readUserData();
 						logger.info("Starten der Login Maske");
 						StartLogin.main(null);
 						frame.dispose();

@@ -1,6 +1,7 @@
 package de.bnd_games.financemanagment.classes;
 
 import java.io.File;
+import java.util.ArrayList;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -182,29 +183,38 @@ public class XMLCreater {
 				+ " geschrieben!");
 	}
 
-	public static void read_users_xml(File path) {
+	public static UserObject read_users_xml(File path) {
 		try {
-			DocumentBuilderFactory dbFactory = DocumentBuilderFactory
-					.newInstance();
+			//deklarierung eines neuen userObjects
+			UserObject usObj = new UserObject();
+			
+			//auslesen von übergebener xml file
+			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 			Document doc = dBuilder.parse(path);
 
+			//hole alle elemente unter account_details
 			NodeList nList = doc.getElementsByTagName("account_details");
 			Node nNode = nList.item(0);
-
+	
+			int i = 0;
+			//auslesen der einzelnen elemente und speichern in einem userObject
 			if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 				Element eElement = (Element) nNode;
-				logger.debug(eElement.getElementsByTagName("firstname").item(0)
-						.getTextContent());
-				logger.debug(eElement.getElementsByTagName("lastname").item(0)
-						.getTextContent());
-				logger.debug(eElement.getElementsByTagName("security_settings")
+				usObj.set_firstname(eElement.getElementsByTagName("firstname")
 						.item(0).getTextContent());
+				usObj.set_lastname(eElement.getElementsByTagName("lastname")
+						.item(0).getTextContent());
+				usObj.set_sec_settings(Boolean.parseBoolean(eElement
+						.getElementsByTagName("security_settings").item(0)
+						.getTextContent()));
+				i++;
 			}
+			return usObj;
 		} catch (Exception ex) {
 			logger.error("Beim auslesen der XML-Datei " + path
 					+ " ist ein Fehler aufgetreten!");
-			return;
+			return null;
 		}
 	}
 
