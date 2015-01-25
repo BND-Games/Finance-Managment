@@ -1,7 +1,6 @@
 package de.bnd_games.financemanagment.classes;
 
 import java.io.File;
-import java.util.ArrayList;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -197,7 +196,6 @@ public class XMLCreater {
 			NodeList nList = doc.getElementsByTagName("account_details");
 			Node nNode = nList.item(0);
 	
-			int i = 0;
 			//auslesen der einzelnen elemente und speichern in einem userObject
 			if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 				Element eElement = (Element) nNode;
@@ -208,7 +206,6 @@ public class XMLCreater {
 				usObj.set_sec_settings(Boolean.parseBoolean(eElement
 						.getElementsByTagName("security_settings").item(0)
 						.getTextContent()));
-				i++;
 			}
 			return usObj;
 		} catch (Exception ex) {
