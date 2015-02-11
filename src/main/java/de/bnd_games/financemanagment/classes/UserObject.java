@@ -48,8 +48,8 @@ public class UserObject {
 	public String get_password() {
 		return this.password;
 	}
-	
-	public String get_initials(){
+
+	public String get_initials() {
 		return this.initials;
 	}
 

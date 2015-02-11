@@ -74,6 +74,7 @@ public class StartScreen extends JFrame {
 		JButton btnAbbrechen = new JButton("Abbrechen");
 		btnAbbrechen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				logger.info("Programm beendet.");
 				System.exit(0);
 			}
 		});
