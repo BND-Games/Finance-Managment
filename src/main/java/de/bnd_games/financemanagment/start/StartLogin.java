@@ -98,13 +98,13 @@ public class StartLogin {
 		JButton btnLogin = new JButton("Login");
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				passwordField.setText(null);
 				char[] password_char = passwordField.getPassword();
 				String password = new String(password_char);
 				
 				if (password.isEmpty() || password == null){
 					logger.warn("Passwort war leer oder NULL");
 					JOptionPane.showMessageDialog(null, "Ihr Passwort war leer. Bitte geben Sie es erneut ein!");
+					passwordField.setText(null);
 					return;
 				}
 				
@@ -118,6 +118,7 @@ public class StartLogin {
 				} else {
 					logger.info("Passwoerter stimmen nicht ueberein!");
 					JOptionPane.showMessageDialog(null, "Ihre Passwoerter stimmen nicht ueberein. Bitte geben Sie es erneut ein!");
+					passwordField.setText(null);
 					return;
 				}
 			}
