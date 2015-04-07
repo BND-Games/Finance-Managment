@@ -38,11 +38,11 @@ public class StartScreen extends JFrame {
 					frame.setVisible(true);
 					if (properties_check() == true) {
 						logger.info("Erst Konfiguration wird gestartet.");
-						StartConfig.main(null);
+						StartConfig.main();
 						frame.dispose();
 					} else {
 						logger.info("Starten der Login Maske");
-						StartLogin.main(null);
+						StartLogin.main();
 						frame.dispose();
 					}
 				} catch (Exception e) {

@@ -54,13 +54,14 @@ public class StartConfig extends JFrame {
 	private JPasswordField passwordField_wdh;
 	private JTextPane txtpn_zf;
 	private JCheckBox checkbox_sicher;
+	
 	static final Logger logger = LogManager.getLogger(StartConfig.class
 			.getName());
 
 	/**
-	 * Launch the application.
+	 * Starten der erst Einrichtung.
 	 */
-	public static void main(String[] args) {
+	public static void main() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {

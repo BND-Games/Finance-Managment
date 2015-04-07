@@ -54,7 +54,7 @@ public class StartLogin {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void main() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -112,7 +112,7 @@ public class StartLogin {
 				
 				if(loginObj.getPassword().equals(password_MD5)){
 					logger.info("Passwoerter stimmen ueberein!");
-					MainScreen.main(null);
+					MainScreen.main();
 					frmFinanzverwaltungLogin.dispose();
 				} else {
 					logger.info("Passwoerter stimmen nicht ueberein!");
@@ -213,7 +213,7 @@ public class StartLogin {
 				} else {
 					if (i == 0){
 						++i;
-						MainScreen.main(null);
+						MainScreen.main();
 						frmFinanzverwaltungLogin.dispose();
 					}
 				}
