@@ -1,4 +1,4 @@
-package de.bnd_games.financemanagment.classes;
+package utilities;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;

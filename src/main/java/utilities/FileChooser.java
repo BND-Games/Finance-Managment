@@ -1,9 +1,11 @@
-package de.bnd_games.financemanagment.classes;
+package utilities;
 
 import java.io.File;
 import java.util.ArrayList;
 
 import javax.swing.JFileChooser;
+
+import objects.UserObject;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

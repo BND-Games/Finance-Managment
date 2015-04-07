@@ -15,8 +15,8 @@ import javax.swing.JButton;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import de.bnd_games.financemanagment.classes.FileCreater;
-import de.bnd_games.financemanagment.classes.Props;
+import utilities.FileCreater;
+import utilities.Props;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;

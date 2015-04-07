@@ -1,7 +1,6 @@
 package de.bnd_games.financemanagment.start;
 
 import java.awt.EventQueue;
-import java.awt.Window;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
@@ -20,15 +19,16 @@ import java.util.ArrayList;
 
 import javax.swing.SwingConstants;
 
+import objects.LoginObject;
+import objects.UserObject;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import de.bnd_games.financemanagment.classes.FileChooser;
-import de.bnd_games.financemanagment.classes.LoginObject;
-import de.bnd_games.financemanagment.classes.MD5Generator;
-import de.bnd_games.financemanagment.classes.Props;
-import de.bnd_games.financemanagment.classes.UserObject;
-import de.bnd_games.financemanagment.classes.XMLCreater;
+import utilities.FileChooser;
+import utilities.MD5Generator;
+import utilities.Props;
+import utilities.XMLCreater;
 import de.bnd_games.financemanagment.guis.MainScreen;
 
 import java.awt.event.MouseAdapter;
@@ -112,7 +112,6 @@ public class StartLogin {
 				
 				if(loginObj.getPassword().equals(password_MD5)){
 					logger.info("Passwoerter stimmen ueberein!");
-					MainScreen ms = new MainScreen();
 					MainScreen.main(null);
 					frmFinanzverwaltungLogin.dispose();
 				} else {
@@ -214,7 +213,6 @@ public class StartLogin {
 				} else {
 					if (i == 0){
 						++i;
-						MainScreen ms = new MainScreen();
 						MainScreen.main(null);
 						frmFinanzverwaltungLogin.dispose();
 					}
