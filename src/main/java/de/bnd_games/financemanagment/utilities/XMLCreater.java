@@ -1,6 +1,7 @@
 package de.bnd_games.financemanagment.utilities;
 
 import java.io.File;
+import java.util.ArrayList;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -23,7 +24,7 @@ public class XMLCreater {
 	static final Logger logger = LogManager.getLogger(XMLCreater.class
 			.getName());
 
-	public void xml_user_file_create(String file_path, String vorname,
+	public static void createUserXML(String file_path, String vorname,
 			String nachname, String kürzel, String organisation,
 			String sec_settings, String account_data_directory_path) {
 		try {
@@ -89,7 +90,7 @@ public class XMLCreater {
 		}
 	}
 
-	public void xml_user_security_file_create(String file_path,
+	public static void createSecurityXML(String file_path,
 			String nickname, String password, String email) {
 		try {
 			DocumentBuilderFactory docFactory = DocumentBuilderFactory
@@ -138,7 +139,7 @@ public class XMLCreater {
 	}
 
 	@SuppressWarnings("finally")
-	public static UserObject read_users_xml(File path) {
+	public static UserObject readXMLUser(File path) {
 		// deklarierung eines neuen userObjects
 		UserObject usObj = new UserObject();
 
@@ -176,7 +177,7 @@ public class XMLCreater {
 	}
 
 	@SuppressWarnings("finally")
-	public static LoginObject read_login_xml(File path) {
+	public static LoginObject readXMLLogin(File path) {
 		// deklarierung eines neuen LoginObject
 		LoginObject loginObj = new LoginObject();
 		try {
@@ -212,4 +213,46 @@ public class XMLCreater {
 			return loginObj;
 		}
 	}
+	
+	public static ArrayList<String> readUserData() {
+		// Deklarierung von UserObject Array zur Speicherung der generierten
+		// User Objects
+		ArrayList<UserObject> result = new ArrayList<UserObject>();
+		// Deklarierung von result_str, hier wird vorname_nachame gespeichert
+		// welcher aus den UserObjects generiert wird.
+		ArrayList<String> result_str = new ArrayList<String>();
+		// Generierung Zählvariablen
+		int i = 0;
+		int j = 0;
+		String user_path = Props.readPropertiesSetting("benutzer_speicherpfad");
+
+		File f = new File(user_path);
+		File[] fileArray = f.listFiles();
+
+		// für jede gefundene Datei wird ein Userobj erzeugt
+		for (File file : fileArray) {
+			String filestr = file.toString().substring(
+					file.toString().lastIndexOf("\\") + 1);
+			String file_path = file.toString() + "\\" + filestr + ".xml";
+			file = new File(file_path);
+			logger.debug(file);
+			logger.debug(filestr);
+			// bekomme userobj -> speichere in result
+			result.add(i, XMLCreater.readXMLUser(file));
+			i++;
+		}
+		// abziehen eines wertes von i, weil 1 zu hoch
+		i--;
+		// Generierung von String für jedes einzelne Object
+		while (i >= 0) {
+			result_str.add(j,
+					result.get(i).get_firstname() + " "
+							+ result.get(i).get_lastname() + " "
+							+ result.get(i).get_sec_settings());
+			i--;
+			j++;
+		}
+		return result_str;
+	}
+
 }

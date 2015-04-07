@@ -82,8 +82,7 @@ public class MainSettings extends JFrame {
 		datenpfad_wählen.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				FileChooser fc = new FileChooser();
-				auswahl_daten = (fc.datenwahl("Wählen Sie den Ablagepfad!"));
+				auswahl_daten = (FileChooser.chooseFile("Wählen Sie den Ablagepfad!"));
 				tf_einstellungen_daten.setText(auswahl_daten);
 			}
 		});
@@ -95,8 +94,8 @@ public class MainSettings extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				Props props = new Props();
-				props.ändere_properties("daten_speicherpfad", auswahl_daten);
-				props.ändere_properties("benutzer_speicherpfad", auswahl_user);
+				props.changePropertiesSetting("daten_speicherpfad", auswahl_daten);
+				props.changePropertiesSetting("benutzer_speicherpfad", auswahl_user);
 			}
 		});
 		btnSpeichern_pfad.setBounds(165, 214, 96, 23);
@@ -106,8 +105,7 @@ public class MainSettings extends JFrame {
 		Button userpfad_wählen = new Button("Pfad w\u00E4hlen");
 		userpfad_wählen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				FileChooser fc = new FileChooser();
-				auswahl_user = (fc.datenwahl("Wählen Sie den Ablagepfad!"));
+				auswahl_user = (FileChooser.chooseFile("Wählen Sie den Ablagepfad!"));
 				tf_einstellungen_user.setText(auswahl_user);
 			}
 		});

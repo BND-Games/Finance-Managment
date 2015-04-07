@@ -10,11 +10,13 @@ public class MD5Generator {
 	static final Logger logger = LogManager.getLogger(MD5Generator.class
 			.getName());
 
+	//TODO Sollte wohl besser nicht main heißen...
 	@SuppressWarnings("finally")
 	public String main(String message) {
+		logger.info("Starte MD5 Generator");
 		String md5_value = null;
 		try {
-			logger.info("Generiere MD5 Wert von: " + message);
+			logger.debug("Generiere MD5 Wert von: " + message);
 			MessageDigest m = MessageDigest.getInstance("MD5");
 			m.update(message.getBytes(), 0, message.length());
 			md5_value = new BigInteger(1, m.digest()).toString();
@@ -23,8 +25,7 @@ public class MD5Generator {
 					+ " ist Fehlgeschlagen.");
 			return "failed";
 		} finally {
-			logger.info("MD5 Wert von: " + message + "erfolgreich erstellt.");
-			logger.info(md5_value);
+			logger.debug("MD5 Wert von: " + message + "erfolgreich erstellt: " + md5_value);
 			return md5_value;
 		}
 	}

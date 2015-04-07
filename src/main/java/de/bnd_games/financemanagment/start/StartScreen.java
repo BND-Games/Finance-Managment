@@ -36,7 +36,7 @@ public class StartScreen extends JFrame {
 				try {
 					StartScreen frame = new StartScreen();
 					frame.setVisible(true);
-					if (properties_check() == true) {
+					if (checkProperties() == true) {
 						logger.info("Erst Konfiguration wird gestartet.");
 						StartConfig.main();
 						frame.dispose();
@@ -82,20 +82,19 @@ public class StartScreen extends JFrame {
 		contentPane.add(btnAbbrechen);
 	}
 
-	private static Boolean properties_check() {
+	private static Boolean checkProperties() {
 		String verzeichniss = "\\Finanzverwaltung";
 		String datei = "\\Finanzverwaltung\\config.properties";
 
-		FileCreater fc = new FileCreater();
 		String pfad_verzeichniss = System.getenv("APPDATA") + verzeichniss;
 		String pfad_datei = System.getenv("APPDATA") + datei;
-		fc.verzeichniss_prüfung(pfad_verzeichniss);
+		FileCreater.checkDirectoryAndCreate(pfad_verzeichniss);
 
-		if (fc.dir_check(pfad_datei) == false) {
-			fc.properties_erstellen();
+		if (FileCreater.checkDirectory(pfad_datei) == false) {
+			FileCreater.createPropertiesFile();
 			return true;
 		} else {
-			if (Props.auslesen_properties("erst_konfiguration").equals(
+			if (Props.readPropertiesSetting("erst_konfiguration").equals(
 					"abgeschlossen")) {
 				return false;
 			} else {

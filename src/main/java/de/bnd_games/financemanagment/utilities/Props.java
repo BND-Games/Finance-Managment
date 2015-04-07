@@ -14,19 +14,22 @@ import org.apache.logging.log4j.Logger;
 public class Props {
 	static final Logger logger = LogManager.getLogger(Props.class.getName());
 
-	private static String pfad_properties() {
-		String pfad_verzeichniss = System.getenv("APPDATA")
+	//Gibt Properties Pfad zurück, mit individuellem APPDATA Pfad
+	protected static String getPropertiesPath() {
+		logger.info("Starte pfad_properties");
+		String result = System.getenv("APPDATA")
 				+ "\\Finanzverwaltung\\config.properties";
-		return pfad_verzeichniss;
+		logger.debug("Properties Pfad ist: " + result);
+		return result;
 	}
 
-	public void erstelle_properties() {
-		logger.info("Schreibe Properties");
+	public void createPropertiesFile() {
+		logger.info("Starte erstelle_properties");
 		Properties prop = new Properties();
 		OutputStream output = null;
 
 		try {
-			output = new FileOutputStream(pfad_properties());
+			output = new FileOutputStream(getPropertiesPath());
 			prop.setProperty("version", "1.0");
 			prop.setProperty("erst_konfiguration", "ausstehend");
 			prop.setProperty("daten_speicherpfad", System.getenv("APPDATA")
@@ -47,56 +50,59 @@ public class Props {
 				try {
 					output.close();
 				} catch (IOException e) {
-					logger.error("Schreiben der Properties Fehlgeschlagen");
+					logger.warn("Schreiben der Properties eventuell Fehlgeschlagen");
 					return;
 				}
 			}
-			logger.info("Schreiben der Properties erfolgreich.");
+			logger.debug("Schreiben der Properties erfolgreich.");
 		}
 	}
 
-	public void ändere_properties(String einstellung, String neuer_wert) {
+	//TODO Rückgabewert einfügen, hier sollte kein OptionPane gestartet werden
+	public void changePropertiesSetting(String settings, String worth) {
+		logger.info("Starte aendere_properties");
 		Properties props = new Properties();
 		try {
-			logger.info("Lese alte Properties ein.");
-			FileInputStream in = new FileInputStream(pfad_properties());
+			logger.debug("Lese alte Properties ein.");
+			FileInputStream in = new FileInputStream(getPropertiesPath());
 			props.load(in);
 			in.close();
 		} catch (Exception ex) {
 			logger.error("Einlesen der alten Properties gescheitert.");
 			return;
 		} finally {
-			logger.info("Einlesen der alten Properties erfolgreich.");
+			logger.debug("Einlesen der alten Properties erfolgreich.");
 		}
 		try {
-			logger.info("Schreiben der neuen Properties.");
-			FileOutputStream out = new FileOutputStream(pfad_properties());
-			props.setProperty(einstellung, neuer_wert);
+			logger.debug("Schreiben der neuen Properties.");
+			FileOutputStream out = new FileOutputStream(getPropertiesPath());
+			props.setProperty(settings, worth);
 			props.store(out, null);
 			out.close();
 		} catch (Exception ex) {
 			logger.error("Schreiben der alten Properties gescheitert.");
 			return;
 		} finally {
-			logger.info("Schreiben der neuen Properties erolgreich.");
+			logger.debug("Schreiben der neuen Properties erolgreich.");
 			JOptionPane.showMessageDialog(null,
 					"Einstellungen erfolgreich gespeichert.");
 		}
 	}
 
-	public static String auslesen_properties(String einstellung) {
-		String einstellung_prop = null;
+	public static String readPropertiesSetting(String settings) {
+		logger.info("Starte auslesen_properties");
+		String result = null;
 		Properties props = new Properties();
 		try {
-			logger.info("Lese Properties ein.");
-			FileInputStream in = new FileInputStream(pfad_properties());
+			logger.debug("Lese Einstellungen fuer: "  + settings + " ein.");
+			FileInputStream in = new FileInputStream(getPropertiesPath());
 			props.load(in);
-			einstellung_prop = props.getProperty(einstellung);
+			result = props.getProperty(settings);
 		} catch (Exception ex) {
 			logger.error("Einlesen der Properties gescheitert.");
 			return "fehlgeschlagen";
 		}
-		logger.info("Einlesen der Properties erfolgreich.");
-		return einstellung_prop;
+		logger.debug("Auslesen der Einstellung war efolgreich: " + result);
+		return result;
 	}
 }

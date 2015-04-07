@@ -37,6 +37,7 @@ import de.bnd_games.financemanagment.utilities.MD5Generator;
 import de.bnd_games.financemanagment.utilities.Props;
 import de.bnd_games.financemanagment.utilities.XMLCreater;
 import de.bnd_games.financemanagment.utilities.FileChooser;
+
 @SuppressWarnings("serial")
 public class StartConfig extends JFrame {
 
@@ -54,7 +55,7 @@ public class StartConfig extends JFrame {
 	private JPasswordField passwordField_wdh;
 	private JTextPane txtpn_zf;
 	private JCheckBox checkbox_sicher;
-	
+
 	static final Logger logger = LogManager.getLogger(StartConfig.class
 			.getName());
 
@@ -137,8 +138,7 @@ public class StartConfig extends JFrame {
 		Button button = new Button("Pfad w\u00E4hlen");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				FileChooser fc = new FileChooser();
-				String ergebnis = fc.datenwahl("Daten Pfad");
+				String ergebnis = FileChooser.chooseFile("Daten Pfad");
 				if (ergebnis != null) {
 					textField_dp.setText(ergebnis);
 				}
@@ -150,8 +150,7 @@ public class StartConfig extends JFrame {
 		Button button_1 = new Button("Pfad w\u00E4hlen");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				FileChooser fc = new FileChooser();
-				String ergebnis = fc.datenwahl("User Pfad");
+				String ergebnis = FileChooser.chooseFile("User Pfad");
 				if (ergebnis != null) {
 					textField_up.setText(ergebnis);
 				}
@@ -189,8 +188,7 @@ public class StartConfig extends JFrame {
 		Button button_2 = new Button("Pfad w\u00E4hlen");
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				FileChooser fc = new FileChooser();
-				String ergebnis = fc.datenwahl("Log Pfad");
+				String ergebnis = FileChooser.chooseFile("Log Pfad");
 				if (ergebnis != null) {
 					textField_lp.setText(ergebnis);
 				}
@@ -514,14 +512,12 @@ public class StartConfig extends JFrame {
 					sec_settings = "false";
 				}
 
-				FileCreater fc = new FileCreater();
-				XMLCreater xml_create = new XMLCreater();
-				fc.verzeichniss_prüfung(textField_dp.getText());
-				fc.verzeichniss_prüfung(textField_up.getText());
-				fc.verzeichniss_prüfung(textField_lp.getText());
+				FileCreater.checkDirectoryAndCreate(textField_dp.getText());
+				FileCreater.checkDirectoryAndCreate(textField_up.getText());
+				FileCreater.checkDirectoryAndCreate(textField_lp.getText());
 
 				// generating user path
-				if (fc.verzeichniss_prüfung(acc_dir_path) == false) {
+				if (FileCreater.checkDirectoryAndCreate(acc_dir_path) == false) {
 					logger.warn("Konfiguration wurde beendet da die Kombination aus Vor und Nachnamen bereits existiert");
 					JOptionPane
 							.showMessageDialog(null,
@@ -529,10 +525,10 @@ public class StartConfig extends JFrame {
 					return;
 				}
 
-				fc.verzeichniss_prüfung(acc_data_dir_path);
+				FileCreater.checkDirectoryAndCreate(acc_data_dir_path);
 
-				if (fc.dir_check(acc_dir_file) == false) {
-					xml_create.xml_user_file_create(acc_dir_file,
+				if (FileCreater.checkDirectory(acc_dir_file) == false) {
+					XMLCreater.createUserXML(acc_dir_file,
 							textField_vorname.getText(),
 							textField_nachname.getText(),
 							textField_kürzel.getText(),
@@ -541,15 +537,15 @@ public class StartConfig extends JFrame {
 				}
 
 				if (checkbox_sicher.isSelected()) {
-					if (fc.verzeichniss_prüfung(acc_dir_sec_path) == true) {
+					if (FileCreater.checkDirectoryAndCreate(acc_dir_sec_path) == true) {
 						acc_dir_sec_path = acc_dir_sec_path + "\\login.xml";
 						String password_md5 = String.valueOf(passwordField
 								.getPassword());
 						MD5Generator md5g = new MD5Generator();
 						password_md5 = md5g.main(password_md5);
-						xml_create.xml_user_security_file_create(
-								acc_dir_sec_path, textField_nick.getText(),
-								password_md5, textField_email.getText());
+						XMLCreater.createSecurityXML(acc_dir_sec_path,
+								textField_nick.getText(), password_md5,
+								textField_email.getText());
 
 					} else {
 						JOptionPane
@@ -560,7 +556,7 @@ public class StartConfig extends JFrame {
 				}
 
 				Props properties = new Props();
-				properties.ändere_properties("erst_konfiguration",
+				properties.changePropertiesSetting("erst_konfiguration",
 						"abgeschlossen");
 				StartScreen.main(null);
 				dispose();
@@ -591,10 +587,10 @@ public class StartConfig extends JFrame {
 	}
 
 	private static void datenfelder_auslesen() {
-		textField_dp.setText(Props.auslesen_properties("daten_speicherpfad"));
-		textField_up
-				.setText(Props.auslesen_properties("benutzer_speicherpfad"));
-		textField_lp.setText(Props.auslesen_properties("log_speicherpfad"));
+		textField_dp.setText(Props.readPropertiesSetting("daten_speicherpfad"));
+		textField_up.setText(Props
+				.readPropertiesSetting("benutzer_speicherpfad"));
+		textField_lp.setText(Props.readPropertiesSetting("log_speicherpfad"));
 	}
 
 	private void zf_erstellen() {

@@ -25,7 +25,6 @@ import de.bnd_games.financemanagment.objects.UserObject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import de.bnd_games.financemanagment.utilities.FileChooser;
 import de.bnd_games.financemanagment.utilities.MD5Generator;
 import de.bnd_games.financemanagment.utilities.Props;
 import de.bnd_games.financemanagment.utilities.XMLCreater;
@@ -198,16 +197,16 @@ public class StartLogin {
 				int i = 0;
 				String value = list.getSelectedValue();
 				String[] value_split = value.split(" ");
-				String value_user = Props.auslesen_properties("benutzer_speicherpfad") + "//"
+				String value_user = Props.readPropertiesSetting("benutzer_speicherpfad") + "//"
 						+ value_split[1] + "." + value_split[0] + "//";
 				value = value_user + value_split[1] + "." + value_split[0]
 						+ ".xml";
 
-				UserObject usobj = XMLCreater.read_users_xml(new File(value));
+				UserObject usobj = XMLCreater.readXMLUser(new File(value));
 
 				if (usobj.get_sec_settings().equals(true)) {
 					value_user += "account//login.xml";
-					loginObj = XMLCreater.read_login_xml(new File(value_user));
+					loginObj = XMLCreater.readXMLLogin(new File(value_user));
 
 					nicknameField.setText(loginObj.getNickname());
 				} else {
@@ -289,7 +288,7 @@ public class StartLogin {
 	private void initalize_list() {
 		logger.info("Erstellen der Userliste");
 		ArrayList<String> result = new ArrayList<String>();
-		result.addAll(0, FileChooser.readUserData());
+		result.addAll(0, XMLCreater.readUserData());
 
 		int i = result.size() - 1;
 		while (i >= 0) {
