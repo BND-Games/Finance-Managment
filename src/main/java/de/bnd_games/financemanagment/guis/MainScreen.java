@@ -47,7 +47,7 @@ public class MainScreen {
 	private void initialize() {
 		frmFinanzverwaltung = new JFrame();
 		frmFinanzverwaltung.setResizable(false);
-		frmFinanzverwaltung.setTitle("Finanzverwaltung 1.0");
+		frmFinanzverwaltung.setTitle("Finanzverwaltung Alpha 1 ");
 		frmFinanzverwaltung.setBounds(100, 100, 1280, 720);
 		frmFinanzverwaltung.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -86,9 +86,9 @@ public class MainScreen {
 		frmFinanzverwaltung.getContentPane().add(tree);
 
 		Label label = new Label(
-				"Finanzverwaltung 1.0 \u00A9 Bj\u00F6rn Bochmann");
+				"Finanzverwaltung Alpha 1 © Björn Bochmann");
 		label.setAlignment(Label.CENTER);
-		label.setBounds(537, 638, 224, 22);
+		label.setBounds(537, 638, 275, 22);
 		frmFinanzverwaltung.getContentPane().add(label);
 
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
