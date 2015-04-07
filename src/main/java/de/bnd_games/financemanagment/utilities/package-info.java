@@ -5,4 +5,4 @@
  * @author bjoer_000
  *
  */
-package utilities;
+package de.bnd_games.financemanagment.utilities;

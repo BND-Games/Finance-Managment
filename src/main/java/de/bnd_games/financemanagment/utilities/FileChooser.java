@@ -1,11 +1,11 @@
-package utilities;
+package de.bnd_games.financemanagment.utilities;
 
 import java.io.File;
 import java.util.ArrayList;
 
 import javax.swing.JFileChooser;
 
-import objects.UserObject;
+import de.bnd_games.financemanagment.objects.UserObject;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -54,9 +54,12 @@ public class FileChooser {
 		}
 		// abziehen eines wertes von i, weil 1 zu hoch
 		i--;
-		//Generierung von String für jedes einzelne Object
+		// Generierung von String für jedes einzelne Object
 		while (i >= 0) {
-			result_str.add(j, result.get(i).get_firstname() + " "+ result.get(i).get_lastname() + " " + result.get(i).get_sec_settings());
+			result_str.add(j,
+					result.get(i).get_firstname() + " "
+							+ result.get(i).get_lastname() + " "
+							+ result.get(i).get_sec_settings());
 			i--;
 			j++;
 		}

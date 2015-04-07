@@ -19,16 +19,16 @@ import java.util.ArrayList;
 
 import javax.swing.SwingConstants;
 
-import objects.LoginObject;
-import objects.UserObject;
+import de.bnd_games.financemanagment.objects.LoginObject;
+import de.bnd_games.financemanagment.objects.UserObject;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import utilities.FileChooser;
-import utilities.MD5Generator;
-import utilities.Props;
-import utilities.XMLCreater;
+import de.bnd_games.financemanagment.utilities.FileChooser;
+import de.bnd_games.financemanagment.utilities.MD5Generator;
+import de.bnd_games.financemanagment.utilities.Props;
+import de.bnd_games.financemanagment.utilities.XMLCreater;
 import de.bnd_games.financemanagment.guis.MainScreen;
 
 import java.awt.event.MouseAdapter;

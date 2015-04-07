@@ -9,8 +9,8 @@ import javax.swing.JTabbedPane;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 
-import utilities.FileChooser;
-import utilities.Props;
+import de.bnd_games.financemanagment.utilities.FileChooser;
+import de.bnd_games.financemanagment.utilities.Props;
 
 import java.awt.Label;
 import java.awt.Button;

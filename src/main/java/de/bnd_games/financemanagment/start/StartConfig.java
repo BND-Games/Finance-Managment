@@ -32,11 +32,11 @@ import javax.swing.JPasswordField;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 
-import utilities.FileCreater;
-import utilities.MD5Generator;
-import utilities.Props;
-import utilities.XMLCreater;
-
+import de.bnd_games.financemanagment.utilities.FileCreater;
+import de.bnd_games.financemanagment.utilities.MD5Generator;
+import de.bnd_games.financemanagment.utilities.Props;
+import de.bnd_games.financemanagment.utilities.XMLCreater;
+import de.bnd_games.financemanagment.utilities.FileChooser;
 @SuppressWarnings("serial")
 public class StartConfig extends JFrame {
 
@@ -136,7 +136,7 @@ public class StartConfig extends JFrame {
 		Button button = new Button("Pfad w\u00E4hlen");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				utilities.FileChooser fc = new utilities.FileChooser();
+				FileChooser fc = new FileChooser();
 				String ergebnis = fc.datenwahl("Daten Pfad");
 				if (ergebnis != null) {
 					textField_dp.setText(ergebnis);
@@ -149,7 +149,7 @@ public class StartConfig extends JFrame {
 		Button button_1 = new Button("Pfad w\u00E4hlen");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				utilities.FileChooser fc = new utilities.FileChooser();
+				FileChooser fc = new FileChooser();
 				String ergebnis = fc.datenwahl("User Pfad");
 				if (ergebnis != null) {
 					textField_up.setText(ergebnis);
@@ -188,7 +188,7 @@ public class StartConfig extends JFrame {
 		Button button_2 = new Button("Pfad w\u00E4hlen");
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				utilities.FileChooser fc = new utilities.FileChooser();
+				FileChooser fc = new FileChooser();
 				String ergebnis = fc.datenwahl("Log Pfad");
 				if (ergebnis != null) {
 					textField_lp.setText(ergebnis);
@@ -590,12 +590,10 @@ public class StartConfig extends JFrame {
 	}
 
 	private static void datenfelder_auslesen() {
-		textField_dp.setText(utilities.Props
-				.auslesen_properties("daten_speicherpfad"));
-		textField_up.setText(utilities.Props
-				.auslesen_properties("benutzer_speicherpfad"));
-		textField_lp.setText(utilities.Props
-				.auslesen_properties("log_speicherpfad"));
+		textField_dp.setText(Props.auslesen_properties("daten_speicherpfad"));
+		textField_up
+				.setText(Props.auslesen_properties("benutzer_speicherpfad"));
+		textField_lp.setText(Props.auslesen_properties("log_speicherpfad"));
 	}
 
 	private void zf_erstellen() {

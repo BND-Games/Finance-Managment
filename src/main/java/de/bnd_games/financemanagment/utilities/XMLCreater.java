@@ -1,4 +1,4 @@
-package utilities;
+package de.bnd_games.financemanagment.utilities;
 
 import java.io.File;
 
@@ -9,8 +9,8 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
-import objects.LoginObject;
-import objects.UserObject;
+import de.bnd_games.financemanagment.objects.LoginObject;
+import de.bnd_games.financemanagment.objects.UserObject;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
