@@ -134,69 +134,24 @@ public class XMLCreater {
 				+ " geschrieben!");
 	}
 
-	public void xml_user_list_create(String file_path, String firstname,
-			String lastname, String security) {
-		try {
-			DocumentBuilderFactory docFactory = DocumentBuilderFactory
-					.newInstance();
-			DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
-
-			// root elements
-			Document doc = docBuilder.newDocument();
-			Element rootElement = doc.createElement("user_list");
-			doc.appendChild(rootElement);
-
-			// Account-List elements
-			Element acc_list = doc.createElement(firstname + "." + lastname);
-			rootElement.appendChild(acc_list);
-
-			// firstname elements
-			Element f_name = doc.createElement("firstname");
-			f_name.appendChild(doc.createTextNode(firstname));
-			acc_list.appendChild(f_name);
-
-			// lastname elements
-			Element l_name = doc.createElement("lastname");
-			l_name.appendChild(doc.createTextNode(lastname));
-			acc_list.appendChild(l_name);
-
-			// security elements
-			Element sec = doc.createElement("security");
-			sec.appendChild(doc.createTextNode(security));
-			acc_list.appendChild(sec);
-
-			// write the content into xml file
-			TransformerFactory transformerFactory = TransformerFactory
-					.newInstance();
-			Transformer transformer = transformerFactory.newTransformer();
-			DOMSource source = new DOMSource(doc);
-			StreamResult result = new StreamResult(new File(file_path));
-
-			transformer.transform(source, result);
-		} catch (Exception ex) {
-			logger.error("Beim erstellen der Sicherheits relevanten XML "
-					+ file_path + " ist ein Fehler aufgetreten!");
-			return;
-		}
-		logger.info("Die Sicherheits relevante XML " + file_path
-				+ " geschrieben!");
-	}
-
+	@SuppressWarnings("finally")
 	public static UserObject read_users_xml(File path) {
+		// deklarierung eines neuen userObjects
+		UserObject usObj = new UserObject();
+
 		try {
-			//deklarierung eines neuen userObjects
-			UserObject usObj = new UserObject();
-			
-			//auslesen von übergebener xml file
-			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+			// auslesen von übergebener xml file
+			DocumentBuilderFactory dbFactory = DocumentBuilderFactory
+					.newInstance();
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 			Document doc = dBuilder.parse(path);
 
-			//hole alle elemente unter account_details
+			// hole alle elemente unter account_details
 			NodeList nList = doc.getElementsByTagName("account_details");
 			Node nNode = nList.item(0);
-	
-			//auslesen der einzelnen elemente und speichern in einem userObject
+
+			// auslesen der einzelnen elemente und speichern in einem userObject
+			// TODO restliche Felder müssen noch eingebaut werden
 			if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 				Element eElement = (Element) nNode;
 				usObj.set_firstname(eElement.getElementsByTagName("firstname")
@@ -207,12 +162,51 @@ public class XMLCreater {
 						.getElementsByTagName("security_settings").item(0)
 						.getTextContent()));
 			}
-			return usObj;
 		} catch (Exception ex) {
 			logger.error("Beim auslesen der XML-Datei " + path
 					+ " ist ein Fehler aufgetreten!");
-			return null;
+			logger.trace(ex);
+		} finally{
+			logger.debug("Gebe UserObject vom auslesen zurueck!");
+			return usObj;
 		}
 	}
 
+	@SuppressWarnings("finally")
+	public static LoginObject read_login_xml(File path) {
+		// deklarierung eines neuen LoginObject
+		LoginObject loginObj = new LoginObject();
+		try {
+
+			// auslesen von übergebener xml file
+			DocumentBuilderFactory dbFactory = DocumentBuilderFactory
+					.newInstance();
+			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+			Document doc = dBuilder.parse(path);
+
+			// hole alle elemente unter account_details
+			NodeList nList = doc.getElementsByTagName("account_informations");
+			Node nNode = nList.item(0);
+
+			// auslesen der einzelnen elemente und speichern in einem userObject
+			// TODO restliche Felder müssen noch eingebaut werden
+			if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+				Element eElement = (Element) nNode;
+				loginObj.setNickname(eElement.getElementsByTagName("nickname")
+						.item(0).getTextContent());
+				loginObj.setPassword(eElement.getElementsByTagName("password")
+						.item(0).getTextContent());
+				loginObj.setEmail(eElement.getElementsByTagName("email")
+						.item(0).getTextContent());
+			}
+
+		} catch (Exception ex) {
+			logger.error("Beim auslesen der XML-Datei " + path
+					+ " ist ein Fehler aufgetreten!");
+			logger.trace(ex);
+		} finally {
+			logger.debug("Gebe LoginObject vom auslesen zurueck!");
+			return loginObj;
+		}
+	}
 }

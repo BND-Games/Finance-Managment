@@ -33,8 +33,6 @@ public class Props {
 					+ "\\Finanzverwaltung\\Data");
 			prop.setProperty("benutzer_speicherpfad", System.getenv("APPDATA")
 					+ "\\Finanzverwaltung\\Users");
-			prop.setProperty("user_list", System.getenv("APPDATA")
-					+ "\\Finanzverwaltung\\Users\\user_list.xml");
 			prop.setProperty("log_speicherpfad", System.getenv("APPDATA")
 					+ "\\Finanzverwaltung\\Logs");
 

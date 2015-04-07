@@ -54,7 +54,7 @@ public class FileChooser {
 		i--;
 		//Generierung von String für jedes einzelne Object
 		while (i >= 0) {
-			result_str.add(j, result.get(i).get_firstname() + " "+ result.get(i).get_lastname());
+			result_str.add(j, result.get(i).get_firstname() + " "+ result.get(i).get_lastname() + " " + result.get(i).get_sec_settings());
 			i--;
 			j++;
 		}
