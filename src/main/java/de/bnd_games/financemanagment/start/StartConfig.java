@@ -68,7 +68,7 @@ public class StartConfig extends JFrame {
 				try {
 					StartConfig frame = new StartConfig();
 					frame.setVisible(true);
-					datenfelder_auslesen();
+					readPathIput();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -605,7 +605,7 @@ public class StartConfig extends JFrame {
 		contentPane.add(lblNewLabel);
 	}
 
-	private static void datenfelder_auslesen() {
+	private static void readPathIput() {
 		textField_dp.setText(Props.readPropertiesSetting("daten_speicherpfad"));
 		textField_up.setText(Props
 				.readPropertiesSetting("benutzer_speicherpfad"));
