@@ -204,7 +204,7 @@ public class StartLogin {
 
 				UserObject usobj = XMLCreater.readXMLUser(new File(value));
 
-				if (usobj.get_sec_settings().equals(true)) {
+				if (usobj.isSec_settings() == true) {
 					value_user += "account//login.xml";
 					loginObj = XMLCreater.readXMLLogin(new File(value_user));
 

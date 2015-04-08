@@ -158,11 +158,11 @@ public class XMLCreater {
 			// TODO restliche Felder müssen noch eingebaut werden
 			if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 				Element eElement = (Element) nNode;
-				usObj.set_firstname(eElement.getElementsByTagName("firstname")
+				usObj.setFirstname(eElement.getElementsByTagName("firstname")
 						.item(0).getTextContent());
-				usObj.set_lastname(eElement.getElementsByTagName("lastname")
+				usObj.setLastnanme(eElement.getElementsByTagName("lastname")
 						.item(0).getTextContent());
-				usObj.set_sec_settings(Boolean.parseBoolean(eElement
+				usObj.setSec_settings(Boolean.parseBoolean(eElement
 						.getElementsByTagName("security_settings").item(0)
 						.getTextContent()));
 			}
@@ -246,9 +246,9 @@ public class XMLCreater {
 		// Generierung von String für jedes einzelne Object
 		while (i >= 0) {
 			result_str.add(j,
-					result.get(i).get_firstname() + " "
-							+ result.get(i).get_lastname() + " "
-							+ result.get(i).get_sec_settings());
+					result.get(i).getFirstname() + " "
+							+ result.get(i).getLastnanme() + " "
+							+ result.get(i).isSec_settings());
 			i--;
 			j++;
 		}
