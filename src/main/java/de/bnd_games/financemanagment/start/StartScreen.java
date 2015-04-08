@@ -33,6 +33,7 @@ public class StartScreen extends JFrame {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
+				logger.info("Starte Finance Managment");
 				try {
 					StartScreen frame = new StartScreen();
 					frame.setVisible(true);
@@ -83,6 +84,7 @@ public class StartScreen extends JFrame {
 	}
 
 	private static Boolean checkProperties() {
+		logger.info("Starte checkProperties");
 		String verzeichniss = "\\Finanzverwaltung";
 		String datei = "\\Finanzverwaltung\\config.properties";
 
@@ -91,13 +93,17 @@ public class StartScreen extends JFrame {
 		FileCreater.checkDirectoryAndCreate(pfad_verzeichniss);
 
 		if (FileCreater.checkDirectory(pfad_datei) == false) {
+			logger.debug("Keine Properties Datei gefunden");
 			FileCreater.createPropertiesFile();
 			return true;
 		} else {
+			logger.debug("Properties Datei gefunden");
 			if (Props.readPropertiesSetting("erst_konfiguration").equals(
 					"abgeschlossen")) {
+				logger.debug("Erst Konfiguration ist bereits abgeschlossen");
 				return false;
 			} else {
+				logger.warn("Erst Konfiguration wurde noch nicht abgeschlossen");
 				return true;
 			}
 		}

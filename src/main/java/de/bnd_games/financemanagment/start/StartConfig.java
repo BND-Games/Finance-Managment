@@ -100,6 +100,7 @@ public class StartConfig extends JFrame {
 		JButton button_10 = new JButton("Weiter");
 		button_10.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				logger.debug("Gehe weiter zu: Pfade");
 				tabbedPane.setEnabledAt(0, false);
 				tabbedPane.setEnabledAt(1, true);
 				tabbedPane.setSelectedIndex(1);
@@ -162,6 +163,7 @@ public class StartConfig extends JFrame {
 		JButton btnWeiter = new JButton("Weiter");
 		btnWeiter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				logger.debug("Gehe weiter zu: User");
 				tabbedPane.setEnabledAt(1, false);
 				tabbedPane.setEnabledAt(2, true);
 				tabbedPane.setSelectedIndex(2);
@@ -230,6 +232,7 @@ public class StartConfig extends JFrame {
 		JButton button_12 = new JButton("Zurück");
 		button_12.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				logger.debug("Gehe zurueck zu: Allgemeines");
 				tabbedPane.setEnabledAt(0, true);
 				tabbedPane.setEnabledAt(1, false);
 				tabbedPane.setSelectedIndex(0);
@@ -299,9 +302,11 @@ public class StartConfig extends JFrame {
 							|| textField_nachname.getText().isEmpty()
 							|| textField_orga.getText().isEmpty()
 							|| textField_kürzel.getText().isEmpty()) {
+						logger.error("Es wurden nicht alle Eingabefelder ausgefuellt");
 						JOptionPane.showMessageDialog(contentPane,
 								"Bitte füllen Sie zunächst alle Felder aus!");
 					} else {
+						logger.debug("Gehe weiter zu: Sicherheit");
 						tabbedPane.setEnabledAt(2, false);
 						tabbedPane.setEnabledAt(3, true);
 						tabbedPane.setSelectedIndex(3);
@@ -311,10 +316,12 @@ public class StartConfig extends JFrame {
 							|| textField_nachname.getText().isEmpty()
 							|| textField_orga.getText().isEmpty()
 							|| textField_kürzel.getText().isEmpty()) {
+						logger.error("Es wurden nicht alle Eingabefelder ausgefuellt");
 						JOptionPane.showMessageDialog(contentPane,
 								"Bitte füllen Sie zunächst alle Felder aus!");
 					} else {
-						zf_erstellen();
+						logger.debug("Gehe weiter zu: Zusammenfassung");
+						createOverview();
 						tabbedPane.setEnabledAt(2, false);
 						tabbedPane.setEnabledAt(4, true);
 						tabbedPane.setSelectedIndex(4);
@@ -337,6 +344,7 @@ public class StartConfig extends JFrame {
 		JButton btnZurck = new JButton("Zur\u00FCck");
 		btnZurck.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				logger.debug("Gehe weiter zu: Pfade");
 				tabbedPane.setEnabledAt(1, true);
 				tabbedPane.setEnabledAt(2, false);
 				tabbedPane.setSelectedIndex(1);
@@ -415,6 +423,7 @@ public class StartConfig extends JFrame {
 						|| passwordField.getPassword() == null
 						|| passwordField_wdh.getPassword() == null
 						|| textField_email.getText().isEmpty()) {
+					logger.error("Es wurden nicht alle Eingabefelder ausgefuellt");	
 					JOptionPane.showMessageDialog(contentPane,
 							"Bitte füllen Sie zunächst alle Felder aus!");
 				} else {
@@ -423,11 +432,13 @@ public class StartConfig extends JFrame {
 					char[] pw_wdh = passwordField_wdh.getPassword();
 					String pw_wdh_s = new String(pw_wdh);
 					if (pw_s.equals(pw_wdh_s)) {
-						zf_erstellen();
+						logger.debug("Gehe weiter zu: Zusammenfassung");
+						createOverview();
 						tabbedPane.setEnabledAt(4, true);
 						tabbedPane.setEnabledAt(3, false);
 						tabbedPane.setSelectedIndex(4);
 					} else {
+						logger.error("Passwoerter stimmen nicht ueberein");
 						JOptionPane.showMessageDialog(contentPane,
 								"Die Passwörter stimmen nicht überein!");
 					}
@@ -440,6 +451,7 @@ public class StartConfig extends JFrame {
 		JButton button_6 = new JButton("Zur\u00FCck");
 		button_6.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				logger.debug("Gehe weiter zu: User");
 				tabbedPane.setEnabledAt(2, true);
 				tabbedPane.setEnabledAt(3, false);
 				tabbedPane.setSelectedIndex(2);
@@ -474,15 +486,16 @@ public class StartConfig extends JFrame {
 		button_9.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (checkbox_sicher.isSelected()) {
+					logger.debug("Gehe weiter zu: Sicherheit");
 					tabbedPane.setEnabledAt(3, true);
 					tabbedPane.setEnabledAt(4, false);
 					tabbedPane.setSelectedIndex(3);
 				} else {
+					logger.debug("Gehe weiter zu: User");
 					tabbedPane.setEnabledAt(2, true);
 					tabbedPane.setEnabledAt(3, false);
 					tabbedPane.setSelectedIndex(2);
 				}
-				;
 			}
 		});
 		button_9.setBounds(205, 312, 104, 23);
@@ -491,7 +504,7 @@ public class StartConfig extends JFrame {
 		JButton btnAbschlieen = new JButton("Best\u00E4tigen");
 		btnAbschlieen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-
+				logger.debug("Bestaetige erst Einrichtung");
 				String sec_settings;
 				String acc_dir_path = System.getenv("APPDATA")
 						+ "\\Finanzverwaltung\\Users\\"
@@ -512,21 +525,26 @@ public class StartConfig extends JFrame {
 					sec_settings = "false";
 				}
 
+				//TODO Try & Catch!?
+				logger.debug("Erstelle Programmpfade");
 				FileCreater.checkDirectoryAndCreate(textField_dp.getText());
 				FileCreater.checkDirectoryAndCreate(textField_up.getText());
 				FileCreater.checkDirectoryAndCreate(textField_lp.getText());
 
 				// generating user path
+				logger.debug("Erstelle Nutzer Verzeichnis");
 				if (FileCreater.checkDirectoryAndCreate(acc_dir_path) == false) {
-					logger.warn("Konfiguration wurde beendet da die Kombination aus Vor und Nachnamen bereits existiert");
+					logger.error("Konfiguration wurde beendet da die Kombination aus Vor und Nachnamen bereits existiert");
 					JOptionPane
 							.showMessageDialog(null,
 									"Die Kombination aus Vor und Nachnamen existiert bereits.");
 					return;
 				}
 
+				logger.debug("Erstelle Nutzer Daten Verzeichnis");
 				FileCreater.checkDirectoryAndCreate(acc_data_dir_path);
 
+				logger.debug("Erstelle Nutzer Daten XML");
 				if (FileCreater.checkDirectory(acc_dir_file) == false) {
 					XMLCreater.createUserXML(acc_dir_file,
 							textField_vorname.getText(),
@@ -537,6 +555,7 @@ public class StartConfig extends JFrame {
 				}
 
 				if (checkbox_sicher.isSelected()) {
+					logger.debug("Erstelle Sicherheitsdaten XML für Nutzer");
 					if (FileCreater.checkDirectoryAndCreate(acc_dir_sec_path) == true) {
 						acc_dir_sec_path = acc_dir_sec_path + "\\login.xml";
 						String password_md5 = String.valueOf(passwordField
@@ -546,7 +565,6 @@ public class StartConfig extends JFrame {
 						XMLCreater.createSecurityXML(acc_dir_sec_path,
 								textField_nick.getText(), password_md5,
 								textField_email.getText());
-
 					} else {
 						JOptionPane
 								.showMessageDialog(null,
@@ -555,6 +573,7 @@ public class StartConfig extends JFrame {
 					}
 				}
 
+				logger.info("Erst Einrichhtung wude erfolgreich abgeschlossen");
 				Props properties = new Props();
 				properties.changePropertiesSetting("erst_konfiguration",
 						"abgeschlossen");
@@ -593,9 +612,11 @@ public class StartConfig extends JFrame {
 		textField_lp.setText(Props.readPropertiesSetting("log_speicherpfad"));
 	}
 
-	private void zf_erstellen() {
+	private void createOverview() {
+		logger.info("Starte createOverview");
 		txtpn_zf.setContentType("text/html");
 		if (checkbox_sicher.isSelected()) {
+			logger.debug("Stelle Zusammenfassung mit Sicherheitsoption zusammen");
 			txtpn_zf.setText("<center><b>Zusammenfassung Ihrer Konfiguration:</b></center><hr><center><b>Ihre Pfade: </b></center>"
 					+ "<b>Daten: </b>"
 					+ textField_dp.getText()
@@ -630,6 +651,7 @@ public class StartConfig extends JFrame {
 					+ "<br><hr>"
 					+ "<center><b>Dies sind Ihre Einstellungen. Wenn Sie etwas ändern möchten tun Sie dies jetzt. Mit einem Klick auf Bestätigen werden diese Einstellungen umgesetzt.</b></center>");
 		} else {
+			logger.debug("Stelle Zusammenfassung ohne Sicherheitsoptionen zusammen");
 			txtpn_zf.setText("<center><b>Zusammenfassung Ihrer Konfiguration:</b></center><hr><center><b>Ihre Pfade: </b></center>"
 					+ "<b>Daten: </b>"
 					+ textField_dp.getText()

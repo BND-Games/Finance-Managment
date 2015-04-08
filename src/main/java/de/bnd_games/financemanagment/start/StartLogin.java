@@ -71,7 +71,7 @@ public class StartLogin {
 	 */
 	public StartLogin() {
 		initialize();
-		initalize_list();
+		initalizeList();
 	}
 
 	/**
@@ -285,18 +285,19 @@ public class StartLogin {
 		frmFinanzverwaltungLogin.getContentPane().setLayout(groupLayout);
 	}
 
-	private void initalize_list() {
-		logger.info("Erstellen der Userliste");
+	private void initalizeList() {
+		logger.info("Starte initalizeList");
 		ArrayList<String> result = new ArrayList<String>();
 		result.addAll(0, XMLCreater.readUserData());
 
 		int i = result.size() - 1;
 		while (i >= 0) {
 			String[] result_arr = result.get(i).split(" ");
-			logger.info("Füge Userlist: " + result_arr[0] + " " + result_arr[1]
+			logger.debug("Füge Userlist: " + result_arr[0] + " " + result_arr[1]
 					+ " hinzu.");
 			dfm.addElement(result_arr[0] + " " + result_arr[1]);
 			i--;
 		}
+		logger.debug("initalizeList abgeschlossen mit: " + result.size() + " Usern");
 	}
 }
