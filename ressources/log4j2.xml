@@ -1,17 +1,28 @@
-<?xml version="1.0" encoding="UTF-8"?> 
-<Configuration> 
-  <Appenders> 
-    <Console name="console" target="SYSTEM_OUT"> 
-      <PatternLayout pattern="%d | %-5p | %F:%L | %m%n"/> 
-    </Console> 
-    <File name="file" fileName="C:\Users\bjoer_000\AppData\Roaming\Finanzverwaltung\Logs\test.log">
-      <PatternLayout pattern="%d | %-5p | %F:%L | %m%n"/> 
-    </File>   
-  </Appenders> 
-  <Loggers> 
-    <Root level="trace"> 
-      <AppenderRef ref="console"/> 
-      <AppenderRef ref="file"/> 
-    </Root> 
-  </Loggers> 
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+<Properties>
+	<Property name="log-path">C:\Users\bjoer_000\AppData\Roaming\Finanzverwaltung\Logs\</Property>
+</Properties>
+
+<Appenders>
+	<RollingFile name="file-log" fileName="${log-path}/alpha1.log"
+		filePattern="${log-path}/alpha1-%d{yyyy-MM-dd}.log">
+		<PatternLayout>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss} | %-5p | %F:%L | %m%n</pattern>
+		</PatternLayout>
+		<Policies>
+			<TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+		</Policies>
+	</RollingFile>
+	<Console name="console" target="SYSTEM_OUT">
+		<PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} | %-5p | %F:%L | %m%n"/>
+	</Console>
+</Appenders>
+
+<Loggers>
+	<Root level="debug" additivity="false">
+		<appender-ref ref="console"/>
+		<appender-ref ref="file-log"/>
+	</Root>
+</Loggers>
 </Configuration>
