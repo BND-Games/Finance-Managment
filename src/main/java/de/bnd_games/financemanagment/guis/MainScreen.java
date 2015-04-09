@@ -14,9 +14,15 @@ import java.awt.event.MouseEvent;
 import javax.swing.JTabbedPane;
 import javax.swing.JPanel;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class MainScreen {
 
 	private JFrame frmFinanzverwaltung;
+	static final Logger logger = LogManager.getLogger(MainScreen.class
+			.getName());
+	
 
 	/**
 	 * Launch the application.
@@ -72,7 +78,7 @@ public class MainScreen {
 			public void mouseClicked(MouseEvent arg0) {
 				MainSettings main_einstellungen = new MainSettings();
 				main_einstellungen.setVisible(true);
-				System.out.println("[Konsole] Einstellungen geöffnet.");
+				logger.info("Oeffne Einstellungen");
 			}
 		});
 		menuBar.add(mnEinstellungen);
