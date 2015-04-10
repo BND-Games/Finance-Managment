@@ -23,14 +23,14 @@ import java.awt.event.ActionEvent;
 
 @SuppressWarnings("serial")
 public class StartScreen extends JFrame {
-	static final Logger logger = LogManager.getLogger(StartScreen.class
-			.getName());
+	static Logger logger = LogManager.getLogger(StartScreen.class.getName());
 	private JPanel contentPane;
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		System.setProperty("user.home", "APPDATA");
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				logger.info("Starte Finance Managment");

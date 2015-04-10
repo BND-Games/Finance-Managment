@@ -293,7 +293,7 @@ public class StartLogin {
 		int i = result.size() - 1;
 		while (i >= 0) {
 			String[] result_arr = result.get(i).split(" ");
-			logger.debug("Füge Userlist: " + result_arr[0] + " " + result_arr[1]
+			logger.debug("Fuege Userlist: " + result_arr[0] + " " + result_arr[1]
 					+ " hinzu.");
 			dfm.addElement(result_arr[0] + " " + result_arr[1]);
 			i--;
