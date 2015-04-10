@@ -41,6 +41,7 @@ import de.bnd_games.financemanagment.utilities.FileChooser;
 @SuppressWarnings("serial")
 public class StartConfig extends JFrame {
 
+	static StartConfig frame;
 	private JPanel contentPane;
 	private static JTextField textField_dp;
 	private static JTextField textField_up;
@@ -66,7 +67,7 @@ public class StartConfig extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					StartConfig frame = new StartConfig();
+					frame = new StartConfig();
 					frame.setVisible(true);
 					readPathIput();
 				} catch (Exception e) {
@@ -112,11 +113,21 @@ public class StartConfig extends JFrame {
 		JButton button_11 = new JButton("Abbrechen");
 		button_11.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				System.exit(0);
+				if(JOptionPane.showConfirmDialog(null, "Sind Sie sich sicher?", "Achtung!", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
+					logger.debug("Konfiguration abgebrochen");
+					frame.dispose();
+				}
 			}
 		});
 		button_11.setBounds(162, 312, 104, 23);
 		panel_4.add(button_11);
+		
+		JTextPane txtn_einleitung = new JTextPane();
+		txtn_einleitung.setText("Wilkommen in der Anwendung Finanzverwaltung \r\n\r\nDa Sie diese Anwendung gerade zum ersten mal nutzen erscheint dieser kleine Einrichtungs Prozess. Gehen Sie diese in Ruhe durch und lesen Sie alle Informationstexte.\r\nDa diese Software sich noch in einem frühen Alpha Stadium befindet kann es bei einigen Einstellungen welche Sie nicht beim Standard belassen zu Fehler kommen. \r\nWir würden uns sehr darüber freuen wenn Sie uns diese melden würden. Dies können Sie unter Folgenden Adressen:\r\n\r\nE-Mail: info@bnd-games.de\r\nBugzilla: bugzilla.bnd-games.de (Es wird ein Account benötigt)");
+		txtn_einleitung.setBackground(SystemColor.control);
+		txtn_einleitung.setEditable(false);
+		txtn_einleitung.setBounds(10, 11, 513, 290);
+		panel_4.add(txtn_einleitung);
 		tabbedPane.setEnabledAt(0, false);
 
 		JPanel panel = new JPanel();
@@ -175,7 +186,10 @@ public class StartConfig extends JFrame {
 		JButton btnAbbrechen = new JButton("Abbrechen");
 		btnAbbrechen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
+				if(JOptionPane.showConfirmDialog(null, "Sind Sie sich sicher?", "Achtung!", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
+					logger.debug("Konfiguration abgebrochen");
+					frame.dispose();
+				}
 			}
 		});
 		btnAbbrechen.setBounds(101, 312, 104, 23);
@@ -335,7 +349,10 @@ public class StartConfig extends JFrame {
 		JButton button_4 = new JButton("Abbrechen");
 		button_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
+				if(JOptionPane.showConfirmDialog(null, "Sind Sie sich sicher?", "Achtung!", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
+					logger.debug("Konfiguration abgebrochen");
+					frame.dispose();
+				}
 			}
 		});
 		button_4.setBounds(101, 312, 104, 23);
@@ -463,7 +480,10 @@ public class StartConfig extends JFrame {
 		JButton button_7 = new JButton("Abbrechen");
 		button_7.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
+				if(JOptionPane.showConfirmDialog(null, "Sind Sie sich sicher?", "Achtung!", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
+					logger.debug("Konfiguration abgebrochen");
+					frame.dispose();
+				}
 			}
 		});
 		button_7.setBounds(101, 312, 104, 23);
@@ -476,7 +496,10 @@ public class StartConfig extends JFrame {
 		JButton button_8 = new JButton("Abbrechen");
 		button_8.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				System.exit(0);
+				if(JOptionPane.showConfirmDialog(null, "Sind Sie sich sicher?", "Achtung!", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
+					logger.debug("Konfiguration abgebrochen");
+					frame.dispose();
+				}
 			}
 		});
 		button_8.setBounds(91, 312, 104, 23);
@@ -585,9 +608,9 @@ public class StartConfig extends JFrame {
 		panel_3.add(btnAbschlieen);
 
 		txtpn_zf = new JTextPane();
+		txtpn_zf.setEditable(false);
 		txtpn_zf.setBackground(SystemColor.control);
 		;
-		txtpn_zf.setEditable(false);
 		txtpn_zf.setBounds(10, 11, 513, 290);
 
 		tabbedPane.setEnabledAt(4, false);

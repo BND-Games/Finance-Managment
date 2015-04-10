@@ -123,6 +123,7 @@ public class StartLogin {
 		});
 
 		JButton btnPasswortVergessen = new JButton("Passwort vergessen?");
+		btnPasswortVergessen.setEnabled(false);
 
 		JLabel lblLogin = new JLabel("Login");
 		lblLogin.setHorizontalAlignment(SwingConstants.CENTER);
